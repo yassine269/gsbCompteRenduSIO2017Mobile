@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Compte Rendu</string>
+    <string name="msg">Bonjour, Veuillez vous identifier :</string>
+    <string name="login">Login :</string>
+    <string name="mdp">Mot de passe :</string>
+    <string name="BvnVisiteur">Bienvenue sur le panel visiteur :</string>
+    <string name="BvnDelegue">Bienvenue sur le panel délégué :</string>
+    <string name="BvnResponsable">Bienvenue sur le panel Responsable :</string>
+    <string name="ChoixVisiteur1">Saisir ou modifier un compte-rendu</string>
+    <string name="ChoixVisiteur2">Consulter la liste des comptes-rendus</string>
+    <string name="SaisieCR">Saisie ou modification de compte-rendu(s)</string>
+    <string name="ConsulterCR">Consultation de compte-rendu(s)</string>
+    <string name="Choix">Je souhaite :</string>
+    <string name="NbRap">Numéro de rapport :</string>
+    <string name="Praticien">Praticien :</string>
+    <string name="DateRap">Date rapport :</string>
+    <string name="MotifVisite">Motif de la visite :</string>
+    <string name="Bilan">Bilan :</string>
+    <string name="Echant">Offre d\'échantillons :</string>
+    <string name="Suivant">Suivant</string>
+    <string name="Precedent">Précédent</string>
+    <string name="Qte">Quantité</string>
+</resources>
