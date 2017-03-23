@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScrollView01"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/activity_main2"
@@ -25,16 +20,16 @@
             android:layout_alignParentStart="true"
             android:id="@+id/Praticien" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_alignTop="@+id/Praticien"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/praticienTxt"
-            android:layout_above="@+id/DateRapport" />
+    <EditText
+        android:id="@+id/praticien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/DateRapport"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/Praticien"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
         <Spinner
             android:layout_width="match_parent"
@@ -90,63 +85,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Bilan"
-            android:layout_centerVertical="true"
+            android:layout_below="@+id/motifSpinner"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="38dp" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/echantSpinner"
+            android:layout_below="@+id/Echant"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/spinner"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/Echant" />
+            android:layout_alignParentStart="true" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:ems="10"
-            android:hint="@string/Qte"
-            android:textSize="12sp"
-            android:layout_below="@+id/spinner"
-            android:layout_centerHorizontal="true" />
+    <EditText
+        android:id="@+id/quant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/echantSpinner"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/Qte"
+        android:inputType="numberSigned"
+        android:textSize="12sp" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/bilanTxt"
+            android:id="@+id/bilan"
             android:layout_alignTop="@+id/Bilan"
             android:layout_toRightOf="@+id/Praticien"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:ems="10"
-            android:layout_alignTop="@+id/DateRapport"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/dateRapTxt"
-            android:layout_above="@+id/MotifVisite" />
+    <EditText
+        android:id="@+id/dateRap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/MotifVisite"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/DateRapport"
+        android:ems="10"
+        android:inputType="date" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_alignTop="@+id/NumRapport"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/numRapTxt"
-            android:layout_alignBottom="@+id/NumRapport"
-            android:textSize="18sp" />
+    <EditText
+        android:id="@+id/numRap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/NumRapport"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/NumRapport"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="18sp" />
 
         <Button
             android:text="@string/Precedent"
@@ -172,9 +167,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/Echant"
             android:layout_marginTop="27dp"
-            android:layout_below="@+id/bilanTxt"
+            android:layout_below="@+id/bilan"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
     </RelativeLayout>
-</ScrollView>
