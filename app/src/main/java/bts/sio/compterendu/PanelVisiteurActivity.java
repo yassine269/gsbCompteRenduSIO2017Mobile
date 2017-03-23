@@ -28,29 +28,6 @@ public class PanelVisiteurActivity extends AppCompatActivity implements View.OnC
         Button bt_consultcr = (Button) findViewById(R.id.ConsulterCR);
         bt_consultcr.setOnClickListener(this);
 
-        // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerTest);
-
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
-
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
-
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
     }
 
     @Override
