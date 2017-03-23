@@ -13,7 +13,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 import bts.sio.compterendu.R;
 
-class AndroidSpinnerExampleActivity extends Activity implements OnItemSelectedListener{
+public class AndroidSpinnerExampleActivity extends Activity implements OnItemSelectedListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
