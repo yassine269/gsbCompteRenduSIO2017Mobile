@@ -24,34 +24,34 @@ public class SaisieCRActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saisiecr);
 
-
         Intent page = getIntent();
-        String numero = page.getStringExtra("numRapSelected");
-        int numeroFinal=numero.charAt(numero.length()-1);
-        int numRapFinal=page.getIntegerArrayListExtra("listCR").get(numeroFinal);
+        if (page.getIntExtra("pageConsult",1)==1) {
+            String numero = page.getStringExtra("numRapSelected");
+            int numeroFinal = numero.charAt(numero.length() - 1);
+            int numRapFinal = page.getIntegerArrayListExtra("listCR").get(numeroFinal);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        AdressBookApi service = retrofit.create(AdressBookApi.class);
-        service.getUnCompteRendu(numRapFinal).enqueue(new Callback<CompteRendu>() {
-            @Override
-            public void onResponse(Call<CompteRendu> call, Response<CompteRendu> response) {
-                ((TextView) findViewById(R.id.numRap)).setText(response.body().getNumRap());
-                ((TextView) findViewById(R.id.praticien)).setText(response.body().getPraticien());
-                ((TextView) findViewById(R.id.dateRap)).setText(response.body().getDateRap().toString());
-                //((Spinner) findViewById(R.id.motifSpinner)).get(response.body().getMotifVisit());
-                ((TextView) findViewById(R.id.bilan)).setText(response.body().getBilan());
-                //((TextView) findViewById(R.id.echantSpinner)).setText(response.body().getNomEchant());
-                ((TextView) findViewById(R.id.quant)).setText(response.body().getNbEchant());
-            }
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            AdressBookApi service = retrofit.create(AdressBookApi.class);
+            service.getUnCompteRendu(numRapFinal).enqueue(new Callback<CompteRendu>() {
+                @Override
+                public void onResponse(Call<CompteRendu> call, Response<CompteRendu> response) {
+                    ((TextView) findViewById(R.id.numRap)).setText(response.body().getNumRap());
+                    ((TextView) findViewById(R.id.praticien)).setText(response.body().getPraticien());
+                    ((TextView) findViewById(R.id.dateRap)).setText(response.body().getDateRap().toString());
+                    //((Spinner) findViewById(R.id.motifSpinner)).get(response.body().getMotifVisit());
+                    ((TextView) findViewById(R.id.bilan)).setText(response.body().getBilan());
+                    //((TextView) findViewById(R.id.echantSpinner)).setText(response.body().getNomEchant());
+                    ((TextView) findViewById(R.id.quant)).setText(response.body().getNbEchant());
+                }
 
-            @Override
-            public void onFailure(Call<CompteRendu> call, Throwable t) {
-                Log.i("retrofit","Erreur lors de l'ajout d'un compte rendu à la page de saisie");
-            }
-        });
-
+                @Override
+                public void onFailure(Call<CompteRendu> call, Throwable t) {
+                    Log.i("retrofit", "Erreur lors de l'ajout d'un compte rendu à la page de saisie");
+                }
+            });
+        }
     }
 }

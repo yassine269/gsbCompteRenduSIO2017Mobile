@@ -42,15 +42,6 @@ public class PanelVisiteurActivity extends AppCompatActivity implements View.OnC
             case R.id.ConsulterCR:
                 Intent page_consulter = new Intent(getApplicationContext(),ConsulterCRActivity.class);
                 startActivity(page_consulter);
-
-
-                //Button bt_ok = (Button) findViewById(R.id.valid_button);
-                //bt_ok.setText("Ok");
-
-                //nb = (TextView) findViewById(R.id.nb_txt);
-                //nb.setText("");
-                //((TextView) findViewById(R.id.password_txt)).setText("");
-                //Toast.makeText(getApplicationContext(),"annuler", Toast.LENGTH_SHORT).show();
                 break;
 
         }

@@ -40,18 +40,6 @@
         android:layout_centerHorizontal="true"
         tools:ignore="UnknownId" />
 
-    <TextView
-        android:text="@string/Choix"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:layout_marginTop="44dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textAllCaps="false"
-        android:textStyle="normal|bold" />
-
     <Spinner
         android:id="@+id/spinnerTest"
         android:layout_width="match_parent"

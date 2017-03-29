@@ -6,7 +6,7 @@
     <string name="BvnVisiteur">Bienvenue sur le panel visiteur :</string>
     <string name="BvnDelegue">Bienvenue sur le panel délégué :</string>
     <string name="BvnResponsable">Bienvenue sur le panel Responsable :</string>
-    <string name="ChoixVisiteur1">Saisir ou modifier un compte-rendu</string>
+    <string name="ChoixVisiteur1">Saisir un compte-rendu</string>
     <string name="ChoixVisiteur2">Consulter la liste des comptes-rendus</string>
     <string name="SaisieCR">Saisie ou modification de compte-rendu(s)</string>
     <string name="ConsulterCR">Consultation de compte-rendu(s)</string>

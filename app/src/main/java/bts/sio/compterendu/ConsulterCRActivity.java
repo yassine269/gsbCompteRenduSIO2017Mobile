@@ -64,6 +64,7 @@ public class ConsulterCRActivity extends AppCompatActivity {
                         Intent page_suivante = new Intent(getApplicationContext(),SaisieCRActivity.class);
                         page_suivante.putExtra("numRapSelected", result);
                         page_suivante.putIntegerArrayListExtra("listCR",(ArrayList<Integer>)listCompteRendu);
+                        page_suivante.putExtra("pageConsult",1);
                         startActivity(page_suivante);
                     }
                 });

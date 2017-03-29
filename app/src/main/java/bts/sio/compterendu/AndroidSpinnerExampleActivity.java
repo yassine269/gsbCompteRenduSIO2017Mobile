@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,12 +13,16 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import bts.sio.compterendu.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AndroidSpinnerExampleActivity extends Activity implements OnItemSelectedListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinnerTest);
@@ -26,16 +31,29 @@ public class AndroidSpinnerExampleActivity extends Activity implements OnItemSel
         spinner.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
+        final List<String> motifs = new ArrayList<String>();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        AdressBookApi service = retrofit.create(AdressBookApi.class);
+        service.getCompteRenduList().enqueue(new Callback<List<CompteRendu>>() {
+            @Override
+            public void onResponse(Call<List<CompteRendu>> call, Response<List<CompteRendu>> response) {
+                for (CompteRendu compteRendu:response.body()) {
+                    motifs.add(compteRendu.getMotifVisit());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CompteRendu>> call, Throwable t) {
+                Log.i("retrofit","Erreur lors de l'ajout d'un motif de compte rendu au spinner des motifs");
+            }
+        });
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, motifs);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

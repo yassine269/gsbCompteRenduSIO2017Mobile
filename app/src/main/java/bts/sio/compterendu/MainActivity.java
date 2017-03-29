@@ -28,19 +28,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
        switch (v.getId()){
            case R.id.valid_button:
-               TextView nb = (TextView) findViewById(R.id.nb_txt);
                Intent page_suivante = new Intent(getApplicationContext(),PanelVisiteurActivity.class);
-               page_suivante.putExtra("nb_txt", nb.getText().toString() );
                startActivity(page_suivante);
                break;
            case R.id.cancel_button:
-               //Button bt_ok = (Button) findViewById(R.id.valid_button);
-               //bt_ok.setText("Ok");
-
-               nb = (TextView) findViewById(R.id.nb_txt);
-               nb.setText("");
+               ((TextView) findViewById(R.id.nb_txt)).setText("");
                ((TextView) findViewById(R.id.password_txt)).setText("");
-               Toast.makeText(getApplicationContext(),"annuler", Toast.LENGTH_SHORT).show();
+               Toast.makeText(getApplicationContext(),"Annulé", Toast.LENGTH_SHORT).show();
                break;
 
        }
