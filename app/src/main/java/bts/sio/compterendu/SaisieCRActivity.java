@@ -44,7 +44,9 @@ public class SaisieCRActivity extends AppCompatActivity {
                     //((Spinner) findViewById(R.id.motifSpinner)).get(response.body().getMotifVisit());
                     ((TextView) findViewById(R.id.bilan)).setText(response.body().getBilan());
                     //((TextView) findViewById(R.id.echantSpinner)).setText(response.body().getNomEchant());
+                    //((TextView) findViewById(R.id.echantSpinner2)).setText(response.body().getNomEchant());
                     ((TextView) findViewById(R.id.quant)).setText(response.body().getNbEchant());
+                    ((TextView) findViewById(R.id.quant2)).setText(response.body().getNbEchant());
                 }
 
                 @Override

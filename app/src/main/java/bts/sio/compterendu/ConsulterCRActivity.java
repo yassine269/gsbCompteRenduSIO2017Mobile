@@ -35,7 +35,7 @@ public class ConsulterCRActivity extends AppCompatActivity {
         setContentView(R.layout.activity_consultercr);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl("http://www.gsb.c7j-studio.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         AdressBookApi service = retrofit.create(AdressBookApi.class);

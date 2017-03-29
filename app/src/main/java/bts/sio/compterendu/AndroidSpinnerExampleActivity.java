@@ -25,7 +25,7 @@ public class AndroidSpinnerExampleActivity extends Activity implements OnItemSel
         super.onCreate(savedInstanceState);
 
         // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerTest);
+        Spinner spinner = (Spinner) findViewById(R.id.motifSpinner);
 
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);

@@ -10,7 +10,27 @@
         tools:context="bts.sio.compterendu.PanelVisiteurActivity"
         android:layout_height="wrap_content">
 
-        <TextView
+    <EditText
+        android:id="@+id/quant2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/Qte"
+        android:inputType="numberSigned"
+        android:textSize="12sp"
+        android:layout_below="@+id/echantSpinner2"
+        android:layout_alignLeft="@+id/quant"
+        android:layout_alignStart="@+id/quant" />
+
+    <Spinner
+        android:id="@+id/echantSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Echant" />
+
+    <TextView
             android:text="@string/Praticien"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,29 +105,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Bilan"
+            android:layout_marginTop="15dp"
             android:layout_below="@+id/motifSpinner"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="38dp" />
+            android:layout_alignParentStart="true" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/echantSpinner"
-            android:layout_below="@+id/Echant"
+            android:id="@+id/echantSpinner2"
+            android:layout_below="@+id/echantSpinner"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="38dp" />
 
     <EditText
         android:id="@+id/quant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/echantSpinner"
-        android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/Qte"
         android:inputType="numberSigned"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_below="@+id/echantSpinner"
+        android:layout_centerHorizontal="true" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -143,30 +164,23 @@
         android:inputType="textPersonName"
         android:textSize="18sp" />
 
-        <Button
-            android:text="@string/Precedent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Precedent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:text="@string/Suivant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Suivant"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+    <Button
+        android:id="@+id/Suivant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Valider"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/SaisieCR"
+        android:layout_alignStart="@+id/SaisieCR"
+        android:layout_alignRight="@+id/SaisieCR"
+        android:layout_alignEnd="@+id/SaisieCR" />
 
         <TextView
             android:text="@string/Echant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Echant"
-            android:layout_marginTop="27dp"
+            android:layout_marginTop="15dp"
             android:layout_below="@+id/bilan"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

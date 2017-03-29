@@ -11,6 +11,7 @@
     <string name="SaisieCR">Saisie ou modification de compte-rendu(s)</string>
     <string name="ConsulterCR">Consultation de compte-rendu(s)</string>
     <string name="Choix">Je souhaite :</string>
+    <string name="Valider">Valider</string>
     <string name="NbRap">Numéro de rapport :</string>
     <string name="Praticien">Praticien :</string>
     <string name="DateRap">Date rapport :</string>
