@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,13 +24,18 @@ public class SaisieCRActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saisiecr);
 
+
+        Intent page = getIntent();
+        String numero = page.getStringExtra("numRapSelected");
+        int numeroFinal=numero.charAt(numero.length()-1);
+        int numRapFinal=page.getIntegerArrayListExtra("listCR").get(numeroFinal);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         AdressBookApi service = retrofit.create(AdressBookApi.class);
-        String textTest = ((EditText) findViewById(numRap)).getText().toString();
-        service.getUnCompteRendu(Integer.parseInt(textTest)).enqueue(new Callback<CompteRendu>() {
+        service.getUnCompteRendu(numRapFinal).enqueue(new Callback<CompteRendu>() {
             @Override
             public void onResponse(Call<CompteRendu> call, Response<CompteRendu> response) {
                 ((TextView) findViewById(R.id.numRap)).setText(response.body().getNumRap());

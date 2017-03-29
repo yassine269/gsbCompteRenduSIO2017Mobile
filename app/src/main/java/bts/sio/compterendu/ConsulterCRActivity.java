@@ -63,8 +63,8 @@ public class ConsulterCRActivity extends AppCompatActivity {
 
                         Intent page_suivante = new Intent(getApplicationContext(),SaisieCRActivity.class);
                         page_suivante.putExtra("numRapSelected", result);
+                        page_suivante.putIntegerArrayListExtra("listCR",(ArrayList<Integer>)listCompteRendu);
                         startActivity(page_suivante);
-
                     }
                 });
             }
@@ -74,9 +74,5 @@ public class ConsulterCRActivity extends AppCompatActivity {
                 Log.i("retrofit","Erreur lors de l'ajout d'un compte rendu à la ListView");
             }
         });
-
-
-
-
     }
 }
