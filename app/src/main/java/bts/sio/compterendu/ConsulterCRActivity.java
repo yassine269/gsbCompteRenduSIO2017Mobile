@@ -26,9 +26,8 @@ import static bts.sio.compterendu.R.id.numRap;
 
 public class ConsulterCRActivity extends AppCompatActivity {
 
-    ListView mListView;
-    List listCompteRendu = new ArrayList();
-    int numRapSelect;
+    public ListView mListView;
+    public List listCompteRendu = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,28 @@ public class ConsulterCRActivity extends AppCompatActivity {
                 for (CompteRendu compteRendu:response.body()) {
                     listCompteRendu.add(compteRendu.getNumRap());
                 }
+                mListView = (ListView) findViewById(R.id.listView);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ConsulterCRActivity.this,
+                        android.R.layout.simple_list_item_1, listCompteRendu);
+                mListView.setAdapter(adapter);
+
+
+                final ListView lv = mListView;
+                lv.setClickable(true);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                        String result = (String) lv.getItemAtPosition(position);
+
+                        Intent page_suivante = new Intent(getApplicationContext(),SaisieCRActivity.class);
+                        page_suivante.putExtra("numRapSelected", result);
+                        startActivity(page_suivante);
+
+                    }
+                });
             }
 
             @Override
@@ -54,28 +75,7 @@ public class ConsulterCRActivity extends AppCompatActivity {
             }
         });
 
-        mListView = (ListView) findViewById(R.id.listView);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ConsulterCRActivity.this,
-                android.R.layout.simple_list_item_1, listCompteRendu);
-        mListView.setAdapter(adapter);
-
-
-        final ListView lv = (ListView) findViewById(R.id.listView);
-        lv.setClickable(true);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-
-                Object o = lv.getItemAtPosition(position);
-
-                Intent page_suivante = new Intent(getApplicationContext(),SaisieCRActivity.class);
-                page_suivante.putExtra("numRapSelected", o.numRap.toString());
-                startActivity(page_suivante);
-
-            }
-        });
 
 
     }
