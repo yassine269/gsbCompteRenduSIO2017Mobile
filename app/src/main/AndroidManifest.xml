@@ -20,6 +20,7 @@
         <activity android:name=".PanelDelegueActivity"></activity>
         <activity android:name=".PanelResponsableActivity"></activity>
         <activity android:name=".SaisieCRActivity"></activity>
+        <activity android:name=".AndroidSpinnerExampleActivity"></activity>
     </application>
 
 </manifest>
