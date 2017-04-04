@@ -15,21 +15,21 @@ import android.widget.ArrayAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private CommentsDataSource datasource;
+    //private CommentsDataSource datasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        datasource = new CommentsDataSource(this);
-        datasource.open();
+        //datasource = new CommentsDataSource(this);
+        //datasource.open();
 
-        List<Comment> values = datasource.getAllComments();
+        //List<Comment> values = datasource.getAllComments();
 
-        if(values){
+        //if(values){
 
-        }
+        //}
 
         Button bt_ok = (Button) findViewById(R.id.valid_button);
         bt_ok.setOnClickListener(this);

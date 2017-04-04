@@ -34,8 +34,10 @@ public class ConsulterCRActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultercr);
 
+        Log.i("retrofit","OK1");
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:80/api/users/{user}/rapport/year.{_format}")
+                .baseUrl("http://gsb/api/users/yassine/rapport/year/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         AdressBookApi service = retrofit.create(AdressBookApi.class);
@@ -44,6 +46,7 @@ public class ConsulterCRActivity extends AppCompatActivity {
             public void onResponse(Call<List<CompteRendu>> call, Response<List<CompteRendu>> response) {
                 for (CompteRendu compteRendu:response.body()) {
                     listCompteRendu.add(compteRendu.getNumRap());
+                    Log.i("retrofit","OK2");
                 }
                 mListView = (ListView) findViewById(R.id.listView);
 

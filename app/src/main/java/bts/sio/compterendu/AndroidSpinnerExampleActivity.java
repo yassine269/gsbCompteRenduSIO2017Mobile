@@ -34,7 +34,7 @@ public class AndroidSpinnerExampleActivity extends Activity implements OnItemSel
         final List<String> motifs = new ArrayList<String>();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl("http://gsb/api/users/yassine/rapport/year")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         AdressBookApi service = retrofit.create(AdressBookApi.class);
