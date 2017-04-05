@@ -15,21 +15,17 @@ import android.widget.ArrayAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //private CommentsDataSource datasource;
+    private CommentsDataSource datasource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //datasource = new CommentsDataSource(this);
-        //datasource.open();
+        datasource = new CommentsDataSource(this);
+        datasource.open();
 
-        //List<Comment> values = datasource.getAllComments();
-
-        //if(values){
-
-        //}
+        List<Comment> values = datasource.getAllComments();
 
         Button bt_ok = (Button) findViewById(R.id.valid_button);
         bt_ok.setOnClickListener(this);
@@ -37,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button bt_annuler = (Button) findViewById(R.id.cancel_button);
         bt_annuler.setOnClickListener(this);
 
+        if(values.isEmpty()){
+
+        } else {
+            ((TextView) findViewById(R.id.nb_txt)).setText(values.get(1).toString());
+        }
     }
 
     @Override
@@ -44,8 +45,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
        switch (v.getId()){
            case R.id.valid_button:
-               Intent page_suivante = new Intent(getApplicationContext(),PanelVisiteurActivity.class);
-               startActivity(page_suivante);
+               if (((TextView) findViewById(R.id.nb_txt)).getText()=="yassine") {
+                   if (((TextView) findViewById(R.id.password_txt)).getText()=="yassine") {
+                       Intent page_suivante = new Intent(getApplicationContext(), PanelVisiteurActivity.class);
+                       startActivity(page_suivante);
+                   } else {
+                       Toast.makeText(getApplicationContext(),"Mot de passe incorrect", Toast.LENGTH_SHORT).show();
+                   }
+               } else {
+                   Toast.makeText(getApplicationContext(),"Aucun compte correspondant à cet identifiant", Toast.LENGTH_SHORT).show();
+               }
                break;
            case R.id.cancel_button:
                ((TextView) findViewById(R.id.nb_txt)).setText("");

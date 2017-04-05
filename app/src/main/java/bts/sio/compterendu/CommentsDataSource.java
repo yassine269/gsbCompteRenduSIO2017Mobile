@@ -68,7 +68,7 @@ public class CommentsDataSource {
         return comments;
     }
 
-    private Comment cursorToComment(Cursor cursor) {
+    public Comment cursorToComment(Cursor cursor) {
         Comment comment = new Comment();
         comment.setId(cursor.getLong(0));
         comment.setComment(cursor.getString(1));
