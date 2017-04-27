@@ -3,17 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main2"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/SaisieCR"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="bts.sio.compterendu.PanelVisiteurActivity">
-
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/layout_id_cr_saisie"
+        android:id="@+id/layout_id_cr_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ConsulterCR"
@@ -23,7 +20,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/cr_id_label_saisie"
+            android:id="@+id/cr_id_label_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -32,8 +29,8 @@
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/cr_id_saisie"
+        <TextView
+            android:id="@+id/cr_id_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -42,14 +39,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_visit_cr_saisie"
+        android:id="@+id/layout_visit_cr_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_id_cr_saisie"
+        android:layout_below="@+id/layout_id_cr_view"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/cr_visit_label_saisie"
+            android:id="@+id/cr_visit_label_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -58,8 +55,8 @@
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/cr_visit_saisie"
+        <TextView
+            android:id="@+id/cr_visit_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -68,14 +65,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_praticien_cr_saisie"
+        android:id="@+id/layout_praticien_cr_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_visit_cr_saisie"
+        android:layout_below="@+id/layout_visit_cr_view"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/cr_praticien_label_saisie"
+            android:id="@+id/cr_praticien_label_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -84,8 +81,8 @@
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/cr_praticien_saisie"
+        <TextView
+            android:id="@+id/cr_praticien_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -94,14 +91,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_date_cr_saisie"
+        android:id="@+id/layout_date_cr_view"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/layout_praticien_cr_saisie"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_praticien_cr_view"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/cr_date_label_saisie"
+            android:id="@+id/cr_date_label_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -110,24 +107,23 @@
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold|italic" />
 
-        <DatePicker
-            android:id="@+id/cr_date_saisie"
+        <TextView
+            android:id="@+id/cr_date_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:datePickerMode="spinner" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_motif_cr_saisie"
+        android:id="@+id/layout_motif_cr_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_date_cr_saisie"
+        android:layout_below="@+id/layout_date_cr_view"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/cr_motif_label_saisie"
+            android:id="@+id/cr_motif_label_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -136,8 +132,8 @@
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/cr_motif_saisie"
+        <TextView
+            android:id="@+id/cr_motif_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -145,14 +141,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_bilan_cr_saisie"
+        android:id="@+id/layout_bilan_cr_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_motif_cr_saisie"
+        android:layout_below="@+id/layout_motif_cr_view"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/cr_bilan_label_saisie"
+            android:id="@+id/cr_bilan_label_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -161,8 +157,8 @@
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/cr_bilan_saisie"
+        <TextView
+            android:id="@+id/cr_bilan_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -170,14 +166,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_echant_cr_saisie"
+        android:id="@+id/layout_echant_cr_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_bilan_cr_saisie"
+        android:layout_below="@+id/layout_bilan_cr_view"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/cr_echantillons_label_saisie"
+            android:id="@+id/cr_echantillons_label_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -186,8 +182,8 @@
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/cr_echantillons_saisie"
+        <TextView
+            android:id="@+id/cr_echantillons_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -195,14 +191,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_coef_impact_cr_saisie"
+        android:id="@+id/layout_coef_impact_cr_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_echant_cr_saisie"
+        android:layout_below="@+id/layout_echant_cr_view"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/cr_coef_impact_label_saisie"
+            android:id="@+id/cr_coef_impact_label_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -211,8 +207,8 @@
             android:textColor="@android:color/darker_gray"
             android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/cr_coef_impact_saisie"
+        <TextView
+            android:id="@+id/cr_coef_impact_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -220,28 +216,31 @@
 
     </LinearLayout>
 
-
     <TextView
-        android:id="@+id/SaisieCR"
+        android:id="@+id/ConsulterCR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/SaisieCR"
+        android:text="@string/ConsulterCR"
         android:textAllCaps="false"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@android:color/holo_blue_light"
         android:textSize="18sp"
         android:textStyle="normal|bold" />
 
     <Button
-        android:id="@+id/Suivant"
+        android:id="@+id/retour_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/SaisieCR"
-        android:layout_alignLeft="@+id/SaisieCR"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/SaisieCR"
-        android:layout_alignStart="@+id/SaisieCR"
-        android:text="@string/Valider" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="@string/retour" />
+
 
 </RelativeLayout>
+

@@ -1,24 +1,88 @@
 <resources>
+
+    <!-- LABEL COMPTE RENDU  -->
+
+    <string name="crIdLabel">Id :</string>
+    <string name="crVisitLabel">Rédacteur :</string>
+    <string name="crPraticLabel">Praticien :</string>
+    <string name="crDateLabel">Date :</string>
+    <string name="crMotifLabel">Motif :</string>
+    <string name="crBilanLabel">Bilan :</string>
+    <string name="crCoefLabel">Coef :</string>
+    <string name="crEchantillonsLabel">Echantillons offert :</string>
+
+
+    <!-- RECUP YASSINE -->
+
     <string name="app_name">Compte Rendu</string>
-    <string name="msg">Bonjour, Veuillez vous identifier :</string>
+
+    <string name="msg">Connexion :</string>
     <string name="login">Login :</string>
     <string name="mdp">Mot de passe :</string>
-    <string name="BvnVisiteur">Bienvenue sur le panel visiteur :</string>
-    <string name="BvnDelegue">Bienvenue sur le panel délégué :</string>
-    <string name="BvnResponsable">Bienvenue sur le panel Responsable :</string>
-    <string name="ChoixVisiteur1">Saisir un compte-rendu</string>
-    <string name="ChoixVisiteur2">Consulter la liste des comptes-rendus</string>
-    <string name="SaisieCR">Saisie ou modification de compte-rendu(s)</string>
+
+    <string name="BvnVisiteur">Connecté en tant que Visiteur :</string>
+    <string name="BvnDelegue">Connecté en tant que Délégué :</string>
+    <string name="BvnResponsable">Connecté en tant que Responsable :</string>
+
+    <string name="ChoixVisiteur1">Compte-rendu</string>
+    <string name="ChoixVisiteur2">Activité complémentaire</string>
+    <string name="ChoixVisiteur3">Médicaments</string>
+    <string name="ChoixVisiteur4">Praticiens</string>
+    <string name="ChoixVisiteur5">Collaborateurs</string>
+
+    <string name="SaisieCR">Saisie de compte-rendu(s)</string>
+    <string name="ModifCR">Modification de compte-rendu(s)</string>
     <string name="ConsulterCR">Consultation de compte-rendu(s)</string>
-    <string name="Choix">Je souhaite :</string>
+
+    <string name="SaisieAC">Saisie d\'activité(s) complémentaire(s)</string>
+    <string name="ModifAC">Modification d\'activité(s) complémentaire(s)</string>
+    <string name="ConsulterAC">Consultation d\'activité(s) complémentaire(s)</string>
+
+    <string name="ConsulterMed">Consultation des médicaments</string>
+
+    <string name="ConsulterPrat">Consultation des praticiens</string>
+
+    <string name="ConsulterCollab">Consultation des collaborateurs</string>
+
+    <string name="Choix">Actions :</string>
+
     <string name="Valider">Valider</string>
+
     <string name="NbRap">Numéro de rapport :</string>
     <string name="Praticien">Praticien :</string>
     <string name="DateRap">Date rapport :</string>
     <string name="MotifVisite">Motif de la visite :</string>
     <string name="Bilan">Bilan :</string>
     <string name="Echant">Offre d\'échantillons :</string>
+    <string name="Qte">Quantité</string>
+
+    <string name="NbAC">Numéro d\'activité :</string>
+    <string name="Participants">Participants :</string>
+    <string name="DateAC">Date activité :</string>
+    <string name="MotifAC">Thème de l\'activité :</string>
+    <string name="budget">Budget alloué :</string>
+    <string name="etat">Etat</string>
+    <string name="realisation">Réalisation</string>
+    <string name="lieu">Lieu :</string>
+
+    <string name="prenom">Prénom :</string>
+    <string name="nom">Nom :</string>
+    <string name="adresse">Adresse :</string>
+    <string name="codeP">Code Postal :</string>
+    <string name="ville">Ville :</string>
+    <string name="type">Type :</string>
+    <string name="coef">Notoriété :</string>
+
+    <string name="secteur">Secteur :</string>
+    <string name="dep">Département :</string>
+    <string name="reg">Région :</string>
+    <string name="numero">Téléphone :</string>
+    <string name="role">Rôle :</string>
+
+    <string name="retour">Retour</string>
     <string name="Suivant">Suivant</string>
     <string name="Precedent">Précédent</string>
-    <string name="Qte">Quantité</string>
+    <string name="Change">Changer de compte</string>
+    <string name="title_activity_cr">CrActivity</string>
+    <string name="Modif_CR_short">Modification</string>
 </resources>

@@ -11,41 +11,86 @@
     tools:context="bts.sio.compterendu.PanelVisiteurActivity">
 
     <TextView
-        android:text="@string/BvnVisiteur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:textStyle="normal|bold"
-        android:textAllCaps="false"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="@string/ChoixVisiteur2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SaisirCR"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        android:id="@+id/ConsulterCR" />
+        android:layout_marginTop="21dp"
+        android:text="@string/BvnVisiteur"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="21sp"
+        android:textStyle="normal|bold" />
 
     <Button
-        android:text="@string/ChoixVisiteur1"
+        android:id="@+id/CR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="83dp"
-        android:id="@+id/SaisirCR"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="83dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="@string/ChoixVisiteur1"
         tools:ignore="UnknownId" />
 
-    <Spinner
-        android:id="@+id/spinnerTest"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/AC"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/ConsulterCR"
-        android:layout_marginTop="64dp" />
+        android:layout_below="@+id/CR"
+        android:layout_marginTop="28dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="@string/ChoixVisiteur2" />
+
+    <Button
+        android:id="@+id/Med"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/AC"
+        android:layout_marginTop="27dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="@string/ChoixVisiteur3" />
+
+    <Button
+        android:id="@+id/Prat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Med"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="@string/ChoixVisiteur4" />
+
+    <Button
+        android:id="@+id/Collab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Prat"
+        android:layout_marginTop="31dp"
+        android:background="@android:drawable/toast_frame"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="@string/ChoixVisiteur5" />
+
 </RelativeLayout>

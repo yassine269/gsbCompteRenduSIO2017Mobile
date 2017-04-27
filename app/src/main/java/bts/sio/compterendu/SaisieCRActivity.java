@@ -4,56 +4,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
+import bts.sio.compterendu.helper.CRReaderDbHelper;
+import bts.sio.compterendu.model.Account;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static bts.sio.compterendu.R.id.numRap;
-
 public class SaisieCRActivity extends AppCompatActivity {
+
+    private CRReaderDbHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saisiecr);
 
-        Intent page = getIntent();
-        if (page.getIntExtra("pageConsult",1)==1) {
-            String numero = page.getStringExtra("numRapSelected");
-            int numeroFinal = numero.charAt(numero.length() - 1);
-            int numRapFinal = page.getIntegerArrayListExtra("listCR").get(numeroFinal);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            AdressBookApi service = retrofit.create(AdressBookApi.class);
-            service.getUnCompteRendu(numRapFinal).enqueue(new Callback<CompteRendu>() {
-                @Override
-                public void onResponse(Call<CompteRendu> call, Response<CompteRendu> response) {
-                    ((TextView) findViewById(R.id.numRap)).setText(response.body().getNumRap());
-                    ((TextView) findViewById(R.id.praticien)).setText(response.body().getPraticien());
-                    ((TextView) findViewById(R.id.dateRap)).setText(response.body().getDateRap().toString());
-                    //((Spinner) findViewById(R.id.motifSpinner)).get(response.body().getMotifVisit());
-                    ((TextView) findViewById(R.id.bilan)).setText(response.body().getBilan());
-                    //((TextView) findViewById(R.id.echantSpinner)).setText(response.body().getNomEchant());
-                    //((TextView) findViewById(R.id.echantSpinner2)).setText(response.body().getNomEchant());
-                    ((TextView) findViewById(R.id.quant)).setText(response.body().getNbEchant());
-                    ((TextView) findViewById(R.id.quant2)).setText(response.body().getNbEchant());
-                }
-
-                @Override
-                public void onFailure(Call<CompteRendu> call, Throwable t) {
-                    Log.i("retrofit", "Erreur lors de l'ajout d'un compte rendu à la page de saisie");
-                }
-            });
+        Intent intent = getIntent();
+        int userId=intent.getIntExtra("userId",0);
+        long timeMillis=intent.getLongExtra("limitConnect",0);
+        final Calendar limitConnect= Calendar.getInstance();
+        limitConnect.setTimeInMillis(timeMillis);
+        mDbHelper=new CRReaderDbHelper(getApplicationContext());
+        //INIT BDD READABLE
+        final Account user = mDbHelper.getUser(getApplicationContext());
+        if (!user.checkConnection(limitConnect)){
+            Intent intentLogin=new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intentLogin);
+        }else {
+            Date limitConnectReplace = new Date(); // Instantiate a Date object
+            limitConnect.setTime(limitConnectReplace);
+            limitConnect.add(Calendar.MINUTE, 5);
         }
+
     }
+
 }

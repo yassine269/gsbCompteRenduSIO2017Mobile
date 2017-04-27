@@ -1,9 +1,8 @@
 package bts.sio.compterendu;
 
-
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,14 +12,14 @@ import java.util.Date;
 import bts.sio.compterendu.helper.CRReaderDbHelper;
 import bts.sio.compterendu.model.Account;
 
-public class PanelVisiteurActivity extends AppCompatActivity {
+public class CrActivity extends Activity {
 
     private CRReaderDbHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visiteur);
+        setContentView(R.layout.activity_cr);
         Intent intent = getIntent();
         int userId=intent.getIntExtra("userId",0);
         long timeMillis=intent.getLongExtra("limitConnect",0);
@@ -37,21 +36,26 @@ public class PanelVisiteurActivity extends AppCompatActivity {
             limitConnect.setTime(limitConnectReplace);
             limitConnect.add(Calendar.MINUTE, 5);
         }
-        Button bt_cr = (Button) findViewById(R.id.CR);
-        bt_cr.setOnClickListener(new View.OnClickListener() {
+        Button bt_consultcr = (Button) findViewById(R.id.consultCR);
+        bt_consultcr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentVisit = new Intent(getApplicationContext(),CrActivity.class);
+                Intent intentVisit = new Intent(getApplicationContext(),ConsulterCRActivity.class);
                 intentVisit.putExtra("userId",user.getId());
                 intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
                 startActivity(intentVisit);
             }
         });
-
+        Button bt_saisiecr = (Button) findViewById(R.id.saisieCR);
+        bt_saisiecr.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentVisit = new Intent(getApplicationContext(),SaisieCRActivity.class);
+                intentVisit.putExtra("userId",user.getId());
+                intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                startActivity(intentVisit);
+            }
+        });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }
