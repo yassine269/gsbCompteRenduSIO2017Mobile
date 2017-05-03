@@ -3,20 +3,21 @@ package bts.sio.compterendu.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yassine on 13/03/2017.
  */
 
-public class RapportVisite {
+public class RapportVisitePost {
 
     private int id;
     @SerializedName("rap_visiteur")
-    private Visiteur rapVisiteur;
+    private int rapVisiteur;
     @SerializedName("rap_praticien")
-    private Praticien rapPraticien;
+    private int rapPraticien;
     @SerializedName("rap_motif")
-    private Motif rapMotif;
+    private int rapMotif;
     @SerializedName("rap_date")
     private String rapDate;
     @SerializedName("rap_saisie_date")
@@ -26,15 +27,37 @@ public class RapportVisite {
     @SerializedName("rap_coef_impact")
     private int rapCoefImpact;
     @SerializedName("rap_echantillons")
-    private ArrayList<RapportEchant> rapEchantillons;
+    private List<RapportEchantPost> rapEchantillons;
 
+    public int getRapVisiteur() {
+        return rapVisiteur;
+    }
 
+    public void setRapVisiteur(int rapVisiteur) {
+        this.rapVisiteur = rapVisiteur;
+    }
 
-    public ArrayList<RapportEchant> getRapEchantillons() {
+    public int getRapPraticien() {
+        return rapPraticien;
+    }
+
+    public void setRapPraticien(int rapPraticien) {
+        this.rapPraticien = rapPraticien;
+    }
+
+    public int getRapMotif() {
+        return rapMotif;
+    }
+
+    public void setRapMotif(int rapMotif) {
+        this.rapMotif = rapMotif;
+    }
+
+    public List<RapportEchantPost> getRapEchantillons() {
         return rapEchantillons;
     }
 
-    public void setRapEchantillons(ArrayList<RapportEchant> rapEchantillons) {
+    public void setRapEchantillons(List<RapportEchantPost> rapEchantillons) {
         this.rapEchantillons = rapEchantillons;
     }
 
@@ -55,21 +78,6 @@ public class RapportVisite {
         this.id = id;
     }
 
-    public Praticien getRapPraticien() {
-        return rapPraticien;
-    }
-
-    public void setRapPraticien(Praticien rapPraticien) {
-        this.rapPraticien = rapPraticien;
-    }
-
-    public Motif getRapMotif() {
-        return rapMotif;
-    }
-
-    public void setRapMotif(Motif rapMotif) {
-        this.rapMotif = rapMotif;
-    }
 
     public String getRapSaisieDate() {
         return rapSaisieDate;
@@ -93,13 +101,5 @@ public class RapportVisite {
 
     public void setRapCoefImpact(int rapCoefImpact) {
         this.rapCoefImpact = rapCoefImpact;
-    }
-
-    public Visiteur getRapVisiteur() {
-        return rapVisiteur;
-    }
-
-    public void setRapVisiteur(Visiteur rapVisiteur) {
-        this.rapVisiteur = rapVisiteur;
     }
 }

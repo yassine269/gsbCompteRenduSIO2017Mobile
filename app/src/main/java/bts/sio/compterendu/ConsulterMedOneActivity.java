@@ -13,8 +13,13 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 
+import bts.sio.compterendu.ConsulterCRActivity;
+import bts.sio.compterendu.MainActivity;
+import bts.sio.compterendu.R;
 import bts.sio.compterendu.helper.CRReaderDbHelper;
 import bts.sio.compterendu.model.Account;
+import bts.sio.compterendu.model.MedConstitution;
+import bts.sio.compterendu.model.Medicament;
 import bts.sio.compterendu.model.RapportEchant;
 import bts.sio.compterendu.model.RapportVisite;
 import bts.sio.compterendu.security.WsseToken;
@@ -29,22 +34,20 @@ import retrofit2.Retrofit;
  * Created by TI-tygangsta on 25/04/2017.
  */
 
-public class ConsulterCrOneActivity  extends AppCompatActivity {
+public class ConsulterMedOneActivity extends AppCompatActivity {
     private CRReaderDbHelper mDbHelper;
     private RapportVisite cr;
     private ProgressDialog mProgressDialog;
-    private String templateKey;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consultercr_one);
+        setContentView(R.layout.activity_consulter_medicament_one);
         Intent intent = getIntent();
         int userId = intent.getIntExtra("userId", 0);
         long timeMillis = intent.getLongExtra("limitConnect", 0);
-        templateKey = intent.getStringExtra("templateKey");
-        int crId=intent.getIntExtra("cr_id",0);
+        int medId=intent.getIntExtra("med_id",0);
         final Calendar limitConnect = Calendar.getInstance();
         limitConnect.setTimeInMillis(timeMillis);
         mDbHelper = new CRReaderDbHelper(getApplicationContext());
@@ -61,7 +64,7 @@ public class ConsulterCrOneActivity  extends AppCompatActivity {
         // INIT LOADER
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Récupération du compte rendu...");
+        mProgressDialog.setMessage("Récupération du médicament...");
         mProgressDialog.show();
         //***********PREPARATION HEADER WSSE******************
         String passEncript=user.hashPassword(user.getSalt(),user.getClearPass());
@@ -69,19 +72,19 @@ public class ConsulterCrOneActivity  extends AppCompatActivity {
         RetrofitConnect conncecting = new RetrofitConnect(user.getUsername(),token);
         Retrofit retrofit=conncecting.buildRequest();
         AdressBookApi service = retrofit.create(AdressBookApi.class);
-        service.getOneCr(crId).enqueue(new Callback<RapportVisite>() {
+        service.getOneMedicament(medId).enqueue(new Callback<Medicament>() {
             @Override
-            public void onResponse(Call<RapportVisite> call, Response<RapportVisite> response) {
+            public void onResponse(Call<Medicament> call, Response<Medicament> response) {
                 //END LOADER
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
                 Log.i("DOWNLOAD :: ","OK");
-                RapportVisite cr = response.body();
-                setTextViewHandler(cr); // Appel méthode pour affichage
+                Medicament med = response.body();
+                setTextViewHandler(med); // Appel méthode pour affichage
             }
 
             @Override
-            public void onFailure(Call<RapportVisite> call, Throwable t) {
+            public void onFailure(Call<Medicament> call, Throwable t) {
                 //END LOADER
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
@@ -94,7 +97,7 @@ public class ConsulterCrOneActivity  extends AppCompatActivity {
         bt_retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentVisit = new Intent(getApplicationContext(),ConsulterCRActivity.class);
+                Intent intentVisit = new Intent(getApplicationContext(),ConsulterMedActivity.class);
                 intentVisit.putExtra("userId",user.getId());
                 intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
                 startActivity(intentVisit);
@@ -102,33 +105,32 @@ public class ConsulterCrOneActivity  extends AppCompatActivity {
         });
     }
     // Affichage des informations récupérer
-    // Affichage des informations récupérer
-    public void setTextViewHandler(RapportVisite cr){
-        final TextView ui_crId=(TextView)findViewById(R.id.cr_id_view);
-        final TextView ui_crVisit=(TextView)findViewById(R.id.cr_visit_view);
-        final TextView ui_crPraticien=(TextView)findViewById(R.id.cr_praticien_view);
-        final TextView ui_crDate=(TextView)findViewById(R.id.cr_date_view);
-        final TextView ui_crMotif=(TextView)findViewById(R.id.cr_motif_view);
-        final TextView ui_crBilan=(TextView)findViewById(R.id.cr_bilan_view);
-        final TextView ui_crCoefImpact=(TextView)findViewById(R.id.cr_coef_impact_view);
-        final TextView ui_crEchantillons=(TextView)findViewById(R.id.cr_echantillons_view);
-        if (cr!=null){
-            String cr_date=cr.getRapDate();
-            cr_date=cr_date.substring(0,10);
-            ui_crId.setText(Integer.toString(cr.getId()));
-            ui_crVisit.setText(cr.getRapVisiteur().getUsername());
-            ui_crPraticien.setText(cr.getRapPraticien().getPra_nom()+" | "+cr.getRapPraticien().getPra_prenom());
-            ui_crDate.setText(cr_date);
-            ui_crBilan.setText(cr.getRapBilan());
-            ui_crMotif.setText(cr.getRapMotif().getMotif_libelle());
-            ui_crCoefImpact.setText(Integer.toString(cr.getRapCoefImpact()));
-            for (RapportEchant rapportEchant :cr.getRapEchantillons()){
-                ui_crEchantillons.append(rapportEchant.getRap_echant_medicament().getMed_depot_legal()+", ");
+    public void setTextViewHandler(Medicament med){
+        final TextView ui_medId=(TextView)findViewById(R.id.medicament_id_view);
+        final TextView ui_medDepotLegal=(TextView)findViewById(R.id.med_depot_legal_view);
+        final TextView ui_medNomCom=(TextView)findViewById(R.id.med_nom_com_view);
+        final TextView ui_medCompositions=(TextView)findViewById(R.id.med_compositions_view);
+        final TextView ui_medEffets=(TextView)findViewById(R.id.med_effets_view);
+        final TextView ui_medContreIndic=(TextView)findViewById(R.id.medicament_contrindic_view);
+        final TextView ui_medFamille=(TextView)findViewById(R.id.med_famille_view);
+        final TextView ui_medPrixEchant=(TextView)findViewById(R.id.prix_echant_view);
+        if (med!=null){
+            ui_medId.setText(Integer.toString(med.getId()));
+            ui_medDepotLegal.setText(med.getMed_depot_legal());
+            ui_medNomCom.setText(med.getMed_nom_commercial());
+            ui_medEffets.setText(med.getMed_effets());
+            ui_medContreIndic.setText(med.getMed_contre_indic());
+            ui_medFamille.setText(med.getMed_famille().getFam_libelle());
+            ui_medPrixEchant.setText(Integer.toString(med.getMed_prix_echant()));
+
+
+            for (MedConstitution medConstitution :med.getMed_compositions()){
+                    ui_medCompositions.append(medConstitution.getConst_composant().getComp_libelle()+", ");
 
             }
         }
         else {
-            Log.i("recup rapport","NON");
+            Log.i("recup medicment","NON");
 
         }
     }

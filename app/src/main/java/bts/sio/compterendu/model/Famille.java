@@ -4,7 +4,7 @@ package bts.sio.compterendu.model;
  * Created by TI-tygangsta on 25/04/2017.
  */
 
-class Famille {
+public class Famille {
     private int id;
     private String fam_libelle;
 

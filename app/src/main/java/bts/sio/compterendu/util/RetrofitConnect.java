@@ -9,6 +9,7 @@ import bts.sio.compterendu.security.WsseToken;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,7 +27,15 @@ public class RetrofitConnect {
         this.token=token;
     }
     public Retrofit buildRequest(){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+// set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+// add your other interceptors …
+// add logging as last interceptor
+
+
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addInterceptor(logging);  // <-- this is the important line!
         httpClient.addInterceptor(new Interceptor() {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
@@ -47,7 +56,7 @@ public class RetrofitConnect {
                 .create();
         OkHttpClient client=httpClient.build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2/gsbCompteRendu/web/app_dev.php/api/")
+                .baseUrl("http://www.gsb.c7j-studio.com/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build();

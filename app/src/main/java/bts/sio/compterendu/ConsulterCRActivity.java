@@ -1,5 +1,6 @@
 package bts.sio.compterendu;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -31,6 +34,9 @@ public class ConsulterCRActivity extends AppCompatActivity {
     private CRReaderDbHelper mDbHelper;
     private RecyclerView ui_CrListRecyclerView;
     private Calendar limitConnect;
+    private ProgressDialog mProgressDialog;
+    private String templateKey;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +45,10 @@ public class ConsulterCRActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int userId=intent.getIntExtra("userId",0);
         long timeMillis=intent.getLongExtra("limitConnect",0);
+        templateKey = intent.getStringExtra("templateKey");
         limitConnect= Calendar.getInstance();
         limitConnect.setTimeInMillis(timeMillis);
+
         mDbHelper=new CRReaderDbHelper(getApplicationContext());
         //INIT BDD READABLE
         final Account user = mDbHelper.getUser(getApplicationContext());
@@ -52,7 +60,50 @@ public class ConsulterCRActivity extends AppCompatActivity {
             limitConnect.setTime(limitConnectReplace);
             limitConnect.add(Calendar.MINUTE, 5);
         }
+        int redacteur = user.getId();
 
+        Button bt_retour = (Button) findViewById(R.id.btn_retour);
+        bt_retour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentVisit = new Intent(getApplicationContext(),CrActivity.class);
+                intentVisit.putExtra("userId",user.getId());
+                intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                startActivity(intentVisit);
+            }
+        });
+        Button bt_action = (Button) findViewById(R.id.btn_action);
+        if (templateKey.equals("view")){
+            ((TextView) findViewById(R.id.ConsultationCR)).setText("Consultation de compte rendus");
+            bt_action.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentVisit = new Intent(getApplicationContext(),ConsulterCRActivity.class);
+                    intentVisit.putExtra("userId",user.getId());
+                    intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                    intentVisit.putExtra("templateKey","edit");
+                    startActivity(intentVisit);
+                }
+            });
+        }else if (templateKey.equals("edit")){
+            bt_action.setText("Consultation");
+            ((TextView) findViewById(R.id.ConsultationCR)).setText("Modification de compte rendus");
+            bt_action.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intentVisit = new Intent(getApplicationContext(),ConsulterCRActivity.class);
+                    intentVisit.putExtra("userId",user.getId());
+                    intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                    intentVisit.putExtra("templateKey","view");
+                    startActivity(intentVisit);
+                }
+            });
+        }
+        // INIT LOADER
+        mProgressDialog=new ProgressDialog(this);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Chargement des compte rendus...");
+        mProgressDialog.show();
         ui_CrListRecyclerView = (RecyclerView)findViewById(R.id.crList_recycler_view);
         ui_CrListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ui_CrListRecyclerView.setAdapter(new CrListAdapter());
@@ -70,9 +121,12 @@ public class ConsulterCRActivity extends AppCompatActivity {
             RetrofitConnect conncecting = new RetrofitConnect(user.getUsername(),token);
             Retrofit retrofit=conncecting.buildRequest();
             AdressBookApi service = retrofit.create(AdressBookApi.class);
-            service.getRapportList().enqueue(new Callback<List<RapportVisite>>() {
+            service.getRapportList(user.getId(),templateKey).enqueue(new Callback<List<RapportVisite>>() {
                 @Override
                 public void onResponse(Call<List<RapportVisite>> call, Response<List<RapportVisite>> response) {
+                    //END LOADER
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
                     Log.i("Download ::","OK");
                     _crList=response.body();
                     notifyDataSetChanged();
@@ -80,7 +134,11 @@ public class ConsulterCRActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<List<RapportVisite>> call, Throwable t) {
-
+                    //END LOADER
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    Log.i("Download ::","ERROR");
+                    Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -99,11 +157,23 @@ public class ConsulterCRActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int cr_id=_crList.get(position).getId();
-                    Intent intentVisit = new Intent(getApplicationContext(),ConsulterCrOneActivity.class);
-                    intentVisit.putExtra("userId",user.getId());
-                    intentVisit.putExtra("userConnect",limitConnect);
-                    intentVisit.putExtra("cr_id",cr_id);
-                    startActivity(intentVisit);
+                    if (templateKey.equals("view")){
+                        Intent intentVisit = new Intent(getApplicationContext(),ConsulterCrOneActivity.class);
+                        intentVisit.putExtra("userId",user.getId());
+                        intentVisit.putExtra("userConnect",limitConnect);
+                        intentVisit.putExtra("templateKey",templateKey);
+                        intentVisit.putExtra("cr_id",cr_id);
+                        startActivity(intentVisit);
+                    }
+                    else if (templateKey.equals("edit")){
+                        Intent intentVisit = new Intent(getApplicationContext(),SaisieCRActivity.class);
+                        intentVisit.putExtra("userId",user.getId());
+                        intentVisit.putExtra("userConnect",limitConnect);
+                        intentVisit.putExtra("crId",cr_id);
+                        intentVisit.putExtra("templateKey",templateKey);
+                        startActivity(intentVisit);
+
+                    }
                 }
             });
             Log.i("ON-BIND-VIEW :","OKOK");
@@ -128,17 +198,17 @@ public class ConsulterCRActivity extends AppCompatActivity {
             super(cell);
             ui_crId=(TextView) cell.findViewById(R.id.cr_id);
             ui_crVisit=(TextView) cell.findViewById(R.id.cr_visit);
-            ui_crPraticien=(TextView) cell.findViewById(R.id.rap_praticien);
-            ui_crDate=(TextView) cell.findViewById(R.id.rap_date);
+            ui_crPraticien=(TextView) cell.findViewById(R.id.rapPraticien);
+            ui_crDate=(TextView) cell.findViewById(R.id.rapDate);
         }
         public void layoutForCr(RapportVisite rapportVisite){
             ui_crId.setText(Integer.toString(rapportVisite.getId()));
-            String usr_nom= rapportVisite.getRap_visiteur().getUsername();
+            String usr_nom= rapportVisite.getRapVisiteur().getUsername();
             ui_crVisit.setText(usr_nom);
-            String cr_date=rapportVisite.getRap_date();
+            String cr_date=rapportVisite.getRapDate();
             cr_date=cr_date.substring(0,10);
             ui_crDate.setText(cr_date);
-            String pra_nom=rapportVisite.getRap_praticien().getPra_nom();
+            String pra_nom=rapportVisite.getRapPraticien().getPra_nom();
             ui_crPraticien.setText(pra_nom);
 
         }

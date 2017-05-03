@@ -23,6 +23,8 @@
         <activity android:name=".PanelResponsableActivity" />
         <activity android:name=".SaisieCRActivity" />
         <activity android:name=".ConsulterCrOneActivity" />
+        <activity android:name=".ConsulterMedOneActivity" />
+        <activity android:name=".ConsulterMedActivity" />
         <activity
             android:name=".CrActivity"
             android:label="@string/title_activity_cr"></activity>

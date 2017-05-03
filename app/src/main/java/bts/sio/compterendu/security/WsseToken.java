@@ -1,12 +1,14 @@
 package bts.sio.compterendu.security;
 
 import android.util.Base64;
+import android.util.Log;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import bts.sio.compterendu.model.Account;
@@ -19,7 +21,7 @@ public class WsseToken {
     public static final String HEADER_AUTHORIZATION = "Authorization";
     public static final String HEADER_WSSE = "X-WSSE";
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.FRANCE);
     //in our case, User is an entity (just a POJO) persisted into sqlite database
     private Account user;
     private String nonce;
@@ -30,6 +32,7 @@ public class WsseToken {
         //we need the user object because we need his username
         this.user = user;
         this.createdAt = generateTimestamp();
+        Log.i("TIMESTAMP",""+generateTimestamp());
         this.nonce = generateNonce();
         this.digest = generateDigest(passEncript);
     }

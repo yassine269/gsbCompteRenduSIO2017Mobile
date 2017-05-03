@@ -85,4 +85,18 @@
     <string name="Change">Changer de compte</string>
     <string name="title_activity_cr">CrActivity</string>
     <string name="Modif_CR_short">Modification</string>
+    <string name="pick_date">modifier date</string>
+    <string name="medPrescrire">Prescription :</string>
+    <string name="medFamille">Famille :</string>
+    <string name="PrixEchant">Prix d\'un échantillons :</string>
+    <string name="ContreIndic">Contre indications :</string>
+    <string name="Effets">Effets :</string>
+    <string name="Compositions">Compositions :</string>
+    <string name="NomCommercial">Nom commercial :</string>
+    <string name="DepotLegal">Depôt Légal :</string>
+    <string name="Id">ID :</string>
+    <string name="MedCell">Medicament</string>
+    <string name="alert_dialog_ok">Valider</string>
+    <string name="ajouter">Ajouter</string>
+    <string name="Delete">Supr</string>
 </resources>

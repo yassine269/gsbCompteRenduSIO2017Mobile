@@ -1,17 +1,27 @@
 package bts.sio.compterendu.model;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Created by TI-tygangsta on 24/04/2017.
  */
 
 public class Praticien {
+    @Expose(serialize = true, deserialize = true)
     private int id;
+    @Expose(serialize = false, deserialize = true)
     private String pra_nom;
+    @Expose(serialize = false, deserialize = true)
     private String pra_prenom;
+    @Expose(serialize = false, deserialize = true)
     private String pra_adresse;
+    @Expose(serialize = false, deserialize = true)
     private String pra_cp;
+    @Expose(serialize = false, deserialize = true)
     private String pra_ville;
+    @Expose(serialize = false, deserialize = true)
     private String pra_coef_notoriete;
+    @Expose(serialize = false, deserialize = true)
     private TypePraticien pra_type;
 
     public int getId() {
@@ -76,5 +86,9 @@ public class Praticien {
 
     public void setPra_type(TypePraticien pra_type) {
         this.pra_type = pra_type;
+    }
+
+    public String toString(){
+        return this.getPra_nom()+" | "+this.getPra_prenom();
     }
 }

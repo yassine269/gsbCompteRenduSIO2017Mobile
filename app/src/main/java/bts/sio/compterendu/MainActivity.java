@@ -1,5 +1,6 @@
 package bts.sio.compterendu;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private CRReaderDbHelper mDbHelper;
     private Calendar calLimitConnect;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +45,38 @@ public class MainActivity extends AppCompatActivity {
         if (user.getUsername() != null){
             ((TextView) findViewById(R.id.nb_txt)).setText(user.getUsername());
             ((TextView) findViewById(R.id.nb_txt)).setFocusable(false);
+        }else {
+            ((TextView) findViewById(R.id.password_txt)).setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.change_button)).setVisibility(View.GONE);
         }
         //********LISTENER VALID BUTTON**************
         Button bt_ok = (Button) findViewById(R.id.valid_button);
         bt_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // INIT LOADER
+                final ProgressDialog mProgressDialog = new ProgressDialog(MainActivity.this);
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.show();
                 Account user=checkAccount();
                 //***********SI UN COMPTE EXISTE EN BASE********************
                 if (user.getUsername() != null) {
+                    mProgressDialog.setMessage("Authentification...");
                     final String identifiant = ((TextView) findViewById(R.id.nb_txt)).getText().toString();
                     final String mdp = ((TextView) findViewById(R.id.password_txt)).getText().toString();
                     String passEncript=user.hashPassword(user.getSalt(),mdp);
                     final WsseToken token  = new WsseToken(user,passEncript);
+                    SQLiteDatabase db=mDbHelper.getReadableDatabase();
+                    ContentValues values=new ContentValues();
+                    values.put(CRReaderContract.CREntry.COLUMN_USER_CLEARPASS,mdp);
+
+                    String selection = CRReaderContract.CREntry.COLUMN_USER_USERNAME +" LIKE ?";
+                    String[] selectionArgs = {user.getUsername()};
+                    int count = db.update(
+                            CRReaderContract.CREntry.TABLE_NAME,
+                            values,
+                            selection,
+                            selectionArgs);
                     //***********PREPARATION HEADER WSSE******************
                     RetrofitConnect conncecting = new RetrofitConnect(identifiant,token);
                     Retrofit retrofit=conncecting.buildRequest();
@@ -63,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
                     service.getApiLogin().enqueue(new Callback<LoginApi>() {
                         @Override
                         public void onResponse(Call<LoginApi> call, Response<LoginApi> response) {
+                            //END LOADER
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
                             if (response.body()==null){
                                 Toast.makeText(getApplicationContext(),"Nom d'utilisateur érroné, veuillez réessayez",Toast.LENGTH_SHORT).show();
                                 Log.i("RESP NULL CONNECT:  ","ok"+response.code());
@@ -79,32 +103,40 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<LoginApi> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez",Toast.LENGTH_SHORT).show();
+                            //END LOADER
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
                 else {
                     // Si aucun compte en base
+                    mProgressDialog.setMessage("Vérification du nom d'utilisateur...");
                     final String identifiant = ((TextView) findViewById(R.id.nb_txt)).getText().toString();
                     final String mdp = ((TextView) findViewById(R.id.password_txt)).getText().toString();
                     // récupération du salt et vérification du username
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://10.0.2.2/gsbCompteRendu/web/app_dev.php/api/")
+                            .baseUrl("http://www.gsb.c7j-studio.com/api/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     AdressBookApi service = retrofit.create(AdressBookApi.class);
                     service.account(identifiant).enqueue(new Callback<Account>() {
                         @Override
                         public void onResponse(Call<Account> call, Response<Account> response) {
+                            //END LOADER
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
                             //Requete pour récuperer les info public du user
                             //Si aucun résultat avec le nom d'utilisateur rentrer
-                            Log.i("PASSAGE:","VALIDE BUTTON CONNECTION NON EN BASE");
+                            Log.i("BTN_VALIDER:"," Tentative d'enregistrement d'un nouveau compte utilisateur");
                             if (response.body()==null){
                                 Toast.makeText(getApplicationContext(),"Nom d'utilisateur érroné, veuillez réessayez",Toast.LENGTH_SHORT).show();
                             }
                             //Si un résultat est renvoyer
                             else {
                                 //Insertion des information du compte en base
+                                String mdp = ((TextView) findViewById(R.id.password_txt)).getText().toString();
                                 CRReaderDbHelper mDbHelper = new CRReaderDbHelper(getApplicationContext());
                                 SQLiteDatabase db = mDbHelper.getWritableDatabase();
                                 ContentValues values = new ContentValues();
@@ -115,18 +147,23 @@ public class MainActivity extends AppCompatActivity {
                                 values.put(CRReaderContract.CREntry.COLUMN_USER_CLEARPASS, mdp);
                                 long newRowId = db.insert(CRReaderContract.CREntry.TABLE_NAME, null, values);
                                 Log.i("BDD INSERT OK", "OKOK");
+                                recreate();
                                 //Création du TIMESTAMP pour session
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Account> call, Throwable t) {
+                            //END LOADER
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
                             Log.i("BDD INSERT"," NO WORK"+t);
-                            Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
                         }
                     });
+
+
                     user=checkAccount();
-                    Log.i("USER :","USER RENTRER EN BASE :"+user.getUsername());
                     if (user.getUsername()!=null){
                         String passEncript=user.hashPassword(user.getSalt(),mdp);
                         final WsseToken token  = new WsseToken(user,passEncript);
@@ -145,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             @Override
                             public void onFailure(Call<LoginApi> call, Throwable t) {
-                                Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

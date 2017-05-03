@@ -43,6 +43,18 @@ public class CrActivity extends Activity {
                 Intent intentVisit = new Intent(getApplicationContext(),ConsulterCRActivity.class);
                 intentVisit.putExtra("userId",user.getId());
                 intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                intentVisit.putExtra("templateKey","view");
+                startActivity(intentVisit);
+            }
+        });
+        Button bt_modifiercr = (Button) findViewById(R.id.modifCR);
+        bt_modifiercr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentVisit = new Intent(getApplicationContext(),ConsulterCRActivity.class);
+                intentVisit.putExtra("userId",user.getId());
+                intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                intentVisit.putExtra("templateKey","edit");
                 startActivity(intentVisit);
             }
         });
@@ -53,6 +65,7 @@ public class CrActivity extends Activity {
                 Intent intentVisit = new Intent(getApplicationContext(),SaisieCRActivity.class);
                 intentVisit.putExtra("userId",user.getId());
                 intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                intentVisit.putExtra("templateKey","view");
                 startActivity(intentVisit);
             }
         });

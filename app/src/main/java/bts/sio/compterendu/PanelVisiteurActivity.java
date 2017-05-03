@@ -47,6 +47,16 @@ public class PanelVisiteurActivity extends AppCompatActivity {
                 startActivity(intentVisit);
             }
         });
+        Button bt_med = (Button) findViewById(R.id.Med);
+        bt_med.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentVisit = new Intent(getApplicationContext(),ConsulterMedActivity.class);
+                intentVisit.putExtra("userId",user.getId());
+                intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                startActivity(intentVisit);
+            }
+        });
 
     }
 

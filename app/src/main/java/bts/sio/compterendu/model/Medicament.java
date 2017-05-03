@@ -18,6 +18,10 @@ public class Medicament {
     private Famille med_famille;
     private Prescrire med_prescrire;
 
+    public String toString(){
+        return this.getMed_nom_commercial();
+    }
+
     public Medicament() {
     }
 

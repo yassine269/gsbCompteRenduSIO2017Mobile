@@ -11,214 +11,208 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="bts.sio.compterendu.PanelVisiteurActivity">
 
-
-    <LinearLayout
-        android:id="@+id/layout_id_cr_saisie"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ConsulterCR"
-        android:layout_centerVertical="false"
-        android:baselineAligned="false"
-        android:foregroundGravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/SaisieCR">
 
-        <TextView
-            android:id="@+id/cr_id_label_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/crIdLabel"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+        <TableLayout
+            android:id="@+id/TableFormCr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/cr_id_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+            <TableRow
+                android:id="@+id/row_praticien_cr_saisie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/cr_praticien_label_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/Praticien"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    <LinearLayout
-        android:id="@+id/layout_visit_cr_saisie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_id_cr_saisie"
-        android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spinner_pra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp" />
 
-        <TextView
-            android:id="@+id/cr_visit_label_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/crVisitLabel"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            </TableRow>
 
-        <EditText
-            android:id="@+id/cr_visit_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+            <TableRow
+                android:id="@+id/row_date_cr_saisie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/cr_date_label_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:text="@string/DateRap"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    <LinearLayout
-        android:id="@+id/layout_praticien_cr_saisie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_visit_cr_saisie"
-        android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/cr_date_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:hint="Choisissez une date" />
 
-        <TextView
-            android:id="@+id/cr_praticien_label_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/Praticien"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            </TableRow>
 
-        <EditText
-            android:id="@+id/cr_praticien_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+            <TableRow
+                android:id="@+id/row_motif_cr_saisie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/cr_motif_label_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:text="@string/MotifVisite"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    <LinearLayout
-        android:id="@+id/layout_date_cr_saisie"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/layout_praticien_cr_saisie"
-        android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spinner_motif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp" />
 
-        <TextView
-            android:id="@+id/cr_date_label_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:text="@string/DateRap"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            </TableRow>
 
-        <DatePicker
-            android:id="@+id/cr_date_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:datePickerMode="spinner" />
-    </LinearLayout>
+            <TableRow
+                android:id="@+id/row_bilan_cr_saisie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/layout_motif_cr_saisie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_date_cr_saisie"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/cr_bilan_label_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/Bilan"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-        <TextView
-            android:id="@+id/cr_motif_label_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:text="@string/MotifVisite"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+                <EditText
+                    android:id="@+id/cr_bilan_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:hint="Bilan de la visite"
+                    android:inputType="textMultiLine" />
 
-        <EditText
-            android:id="@+id/cr_motif_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+            </TableRow>
 
-    <LinearLayout
-        android:id="@+id/layout_bilan_cr_saisie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_motif_cr_saisie"
-        android:orientation="horizontal">
+            <TableRow
+                android:id="@+id/row_echant_cr_saisie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/cr_bilan_label_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/Bilan"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/Echant"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-        <EditText
-            android:id="@+id/cr_bilan_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+                <Spinner
+                    android:id="@+id/spinner_med"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
 
-    <LinearLayout
-        android:id="@+id/layout_echant_cr_saisie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_bilan_cr_saisie"
-        android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/cr_echant_quant_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="0.5"
+                    android:hint="Quantite"
+                    android:inputType="number" />
 
-        <TextView
-            android:id="@+id/cr_echantillons_label_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/Echant"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+                <Button
+                    android:id="@+id/btn_add"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/ajouter" />
+            </TableRow>
 
-        <EditText
-            android:id="@+id/cr_echantillons_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/row_echant_cr_entry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/layout_coef_impact_cr_saisie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_echant_cr_saisie"
-        android:orientation="horizontal">
+                <ListView
+                    android:id="@+id/list_cr_echant"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/cr_coef_impact_label_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/crCoefLabel"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/row_coef_cr_saisie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/cr_coef_impact_saisie"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/cr_coef_saisie_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/crCoefLabel"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/cr_coef_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:hint="Coeficient d'impact" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/row_btn_cr_saisie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/valid_saisie_cr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/SaisieCR"
+                    android:layout_alignLeft="@+id/SaisieCR"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/SaisieCR"
+                    android:layout_alignStart="@+id/SaisieCR"
+                    android:text="@string/Valider" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
 
 
     <TextView
@@ -233,15 +227,6 @@
         android:textSize="18sp"
         android:textStyle="normal|bold" />
 
-    <Button
-        android:id="@+id/Suivant"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/SaisieCR"
-        android:layout_alignLeft="@+id/SaisieCR"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/SaisieCR"
-        android:layout_alignStart="@+id/SaisieCR"
-        android:text="@string/Valider" />
 
 </RelativeLayout>
+
