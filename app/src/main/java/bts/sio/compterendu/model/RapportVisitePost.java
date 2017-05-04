@@ -5,10 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Yassine on 13/03/2017.
- */
-
 public class RapportVisitePost {
 
     private int id;

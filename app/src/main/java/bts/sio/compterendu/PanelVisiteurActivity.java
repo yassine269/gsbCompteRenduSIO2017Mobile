@@ -57,6 +57,16 @@ public class PanelVisiteurActivity extends AppCompatActivity {
                 startActivity(intentVisit);
             }
         });
+        Button bt_pra = (Button) findViewById(R.id.Prat);
+        bt_pra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentVisit = new Intent(getApplicationContext(),ConsulterPraActivity.class);
+                intentVisit.putExtra("userId",user.getId());
+                intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                startActivity(intentVisit);
+            }
+        });
 
     }
 

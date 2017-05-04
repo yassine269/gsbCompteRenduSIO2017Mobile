@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/activity_content_rapport"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="bts.sio.compterendu.PanelVisiteurActivity">
+    <TextView
+        android:id="@+id/ConsulterPra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/ConsulterPrat"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
+    <LinearLayout
+        android:id="@+id/action_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ConsulterPra"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btn_retour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/toast_frame"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:layout_marginRight="10dp"
+            android:text="@string/retour" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/praList_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/action_layout"
+        android:layout_marginTop="30dp" />
+
+</RelativeLayout>

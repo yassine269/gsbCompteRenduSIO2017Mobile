@@ -12,6 +12,13 @@
     <string name="crEchantillonsLabel">Echantillons offert :</string>
 
 
+
+    <string name="err_coef">Veuillez rentrer un coef entre 0 et 10</string>
+    <string name="err_echant_quant">Veuillez rentrer une quantité entre 1 et 10</string>
+    <string name="err_bilan">Veuillez complétez le bilan de la visite</string>
+
+
+
     <!-- RECUP YASSINE -->
 
     <string name="app_name">Compte Rendu</string>
@@ -97,6 +104,13 @@
     <string name="Id">ID :</string>
     <string name="MedCell">Medicament</string>
     <string name="alert_dialog_ok">Valider</string>
-    <string name="ajouter">Ajouter</string>
+    <string name="ajouter">+</string>
     <string name="Delete">Supr</string>
+    <string name="praPrenom">prénom :</string>
+    <string name="praNom">Nom :</string>
+    <string name="praAdresse">Adresse :</string>
+    <string name="praCp">Code postal :</string>
+    <string name="praVille">Ville :</string>
+    <string name="praCoefNot">Coeficient de notoriété :</string>
+    <string name="praType">Type :</string>
 </resources>

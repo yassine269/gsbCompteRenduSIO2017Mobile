@@ -56,7 +56,7 @@ public class RetrofitConnect {
                 .create();
         OkHttpClient client=httpClient.build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.gsb.c7j-studio.com/api/")
+                .baseUrl("http://10.0.2.2/gsbCompteRendu/web/app_dev.php/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build();

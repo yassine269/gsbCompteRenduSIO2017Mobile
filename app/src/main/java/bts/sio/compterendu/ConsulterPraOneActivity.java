@@ -13,14 +13,11 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 
-import bts.sio.compterendu.ConsulterCRActivity;
-import bts.sio.compterendu.MainActivity;
-import bts.sio.compterendu.R;
 import bts.sio.compterendu.helper.CRReaderDbHelper;
 import bts.sio.compterendu.model.Account;
 import bts.sio.compterendu.model.MedConstitution;
 import bts.sio.compterendu.model.Medicament;
-import bts.sio.compterendu.model.RapportEchant;
+import bts.sio.compterendu.model.Praticien;
 import bts.sio.compterendu.model.RapportVisite;
 import bts.sio.compterendu.security.WsseToken;
 import bts.sio.compterendu.util.AdressBookApi;
@@ -34,7 +31,7 @@ import retrofit2.Retrofit;
  * Created by TI-tygangsta on 25/04/2017.
  */
 
-public class ConsulterMedOneActivity extends AppCompatActivity {
+public class ConsulterPraOneActivity extends AppCompatActivity {
     private CRReaderDbHelper mDbHelper;
     private ProgressDialog mProgressDialog;
 
@@ -42,11 +39,11 @@ public class ConsulterMedOneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consulter_medicament_one);
+        setContentView(R.layout.activity_consulter_praticien_one);
         Intent intent = getIntent();
         int userId = intent.getIntExtra("userId", 0);
         long timeMillis = intent.getLongExtra("limitConnect", 0);
-        int medId=intent.getIntExtra("med_id",0);
+        int praId=intent.getIntExtra("pra_id",0);
         final Calendar limitConnect = Calendar.getInstance();
         limitConnect.setTimeInMillis(timeMillis);
         mDbHelper = new CRReaderDbHelper(getApplicationContext());
@@ -63,7 +60,7 @@ public class ConsulterMedOneActivity extends AppCompatActivity {
         // INIT LOADER
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Récupération du médicament...");
+        mProgressDialog.setMessage("Récupération du praticien...");
         mProgressDialog.show();
         //***********PREPARATION HEADER WSSE******************
         String passEncript=user.hashPassword(user.getSalt(),user.getClearPass());
@@ -71,19 +68,19 @@ public class ConsulterMedOneActivity extends AppCompatActivity {
         RetrofitConnect conncecting = new RetrofitConnect(user.getUsername(),token);
         Retrofit retrofit=conncecting.buildRequest();
         AdressBookApi service = retrofit.create(AdressBookApi.class);
-        service.getOneMedicament(medId).enqueue(new Callback<Medicament>() {
+        service.getOnePraticien(praId).enqueue(new Callback<Praticien>() {
             @Override
-            public void onResponse(Call<Medicament> call, Response<Medicament> response) {
+            public void onResponse(Call<Praticien> call, Response<Praticien> response) {
                 //END LOADER
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
                 Log.i("DOWNLOAD :: ","OK");
-                Medicament med = response.body();
-                setTextViewHandler(med); // Appel méthode pour affichage
+                Praticien praticien = response.body();
+                setTextViewHandler(praticien); // Appel méthode pour affichage
             }
 
             @Override
-            public void onFailure(Call<Medicament> call, Throwable t) {
+            public void onFailure(Call<Praticien> call, Throwable t) {
                 //END LOADER
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
@@ -96,7 +93,7 @@ public class ConsulterMedOneActivity extends AppCompatActivity {
         bt_retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentVisit = new Intent(getApplicationContext(),ConsulterMedActivity.class);
+                Intent intentVisit = new Intent(getApplicationContext(),ConsulterPraActivity.class);
                 intentVisit.putExtra("userId",user.getId());
                 intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
                 startActivity(intentVisit);
@@ -104,32 +101,26 @@ public class ConsulterMedOneActivity extends AppCompatActivity {
         });
     }
     // Affichage des informations récupérer
-    public void setTextViewHandler(Medicament med){
-        final TextView ui_medId=(TextView)findViewById(R.id.medicament_id_view);
-        final TextView ui_medDepotLegal=(TextView)findViewById(R.id.med_depot_legal_view);
-        final TextView ui_medNomCom=(TextView)findViewById(R.id.med_nom_com_view);
-        final TextView ui_medCompositions=(TextView)findViewById(R.id.med_compositions_view);
-        final TextView ui_medEffets=(TextView)findViewById(R.id.med_effets_view);
-        final TextView ui_medContreIndic=(TextView)findViewById(R.id.medicament_contrindic_view);
-        final TextView ui_medFamille=(TextView)findViewById(R.id.med_famille_view);
-        final TextView ui_medPrixEchant=(TextView)findViewById(R.id.prix_echant_view);
-        if (med!=null){
-            ui_medId.setText(Integer.toString(med.getId()));
-            ui_medDepotLegal.setText(med.getMed_depot_legal());
-            ui_medNomCom.setText(med.getMed_nom_commercial());
-            ui_medEffets.setText(med.getMed_effets());
-            ui_medContreIndic.setText(med.getMed_contre_indic());
-            ui_medFamille.setText(med.getMed_famille().getFam_libelle());
-            ui_medPrixEchant.setText(Integer.toString(med.getMed_prix_echant()));
-
-
-            for (MedConstitution medConstitution :med.getMed_compositions()){
-                    ui_medCompositions.append(medConstitution.getConst_composant().getComp_libelle()+", ");
-
-            }
+    public void setTextViewHandler(Praticien pra){
+        final TextView ui_praId=(TextView)findViewById(R.id.praticien_id_view);
+        final TextView ui_praNom=(TextView)findViewById(R.id.pra_nom_view);
+        final TextView ui_praPrenom=(TextView)findViewById(R.id.pra_prenom_view);
+        final TextView ui_praAdresse=(TextView)findViewById(R.id.pra_adresse_view);
+        final TextView ui_praCp=(TextView)findViewById(R.id.pra_cp_view);
+        final TextView ui_praVille=(TextView)findViewById(R.id.pra_ville_view);
+        final TextView ui_praCoefNot=(TextView)findViewById(R.id.pra_coef_view);
+        final TextView ui_praType=(TextView)findViewById(R.id.pra_type_view);
+        if (pra!=null){
+            ui_praId.setText(Integer.toString(pra.getId()));
+            ui_praNom.setText(pra.getPra_nom());
+            ui_praPrenom.setText(pra.getPra_prenom());
+            ui_praAdresse.setText(pra.getPra_adresse());
+            ui_praCp.setText(pra.getPra_cp());
+            ui_praVille.setText(pra.getPra_ville());
+            ui_praType.setText(pra.getPra_type().getType_libelle());
         }
         else {
-            Log.i("recup medicment","NON");
+            Log.i("recup praticien","NON");
 
         }
     }

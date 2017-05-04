@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     final String mdp = ((TextView) findViewById(R.id.password_txt)).getText().toString();
                     // récupération du salt et vérification du username
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://www.gsb.c7j-studio.com/api/")
+                            .baseUrl("http://10.0.2.2/gsbCompteRendu/web/app_dev.php/api/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     AdressBookApi service = retrofit.create(AdressBookApi.class);

@@ -37,5 +37,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-moshi:2.0.0-beta3'
     compile 'com.squareup.okhttp3:logging-interceptor:3.0.0-RC1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.basgeekball:awesome-validation:2.0'
     testCompile 'junit:junit:4.12'
 }

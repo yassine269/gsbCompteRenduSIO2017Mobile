@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+import com.google.common.collect.Range;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,6 +50,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
+import static java.util.Locale.FRANCE;
+
 public class SaisieCRActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     // INIT VARIABLE
@@ -54,13 +63,15 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
     private ArrayAdapter<Praticien> adapterPra;
     private ArrayAdapter<Motif> adapterMotif;
 
-
+    public int Doit(){
+        return 0;
+    }
     // FRAGMENT CLASS FOR DATEPICKER
     public static class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar calendar = Calendar.getInstance(Locale.FRANCE);
+            final Calendar calendar = Calendar.getInstance();
             int yy = calendar.get(Calendar.YEAR);
             int mm = calendar.get(Calendar.MONTH);
             int dd = calendar.get(Calendar.DAY_OF_MONTH);
@@ -72,7 +83,8 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
         }
         public void populateSetDate(int year, int month, int day) {
             EditText dob= (EditText) getActivity(). findViewById(R.id.cr_date_saisie);
-            dob.setText(month+"-"+day+"-"+year);
+            month=month+1;
+            dob.setText(year+"-"+month+"-"+day);
         }
 
     }
@@ -81,7 +93,7 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saisiecr);
         // GET ACCOUNT AND VERIFY TIMING
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final int userId=intent.getIntExtra("userId",0);
         final long timeMillis=intent.getLongExtra("limitConnect",0);
         templateKey = intent.getStringExtra("templateKey");
@@ -98,6 +110,13 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
             limitConnect.setTime(limitConnectReplace);
             limitConnect.add(Calendar.MINUTE, 5);
         }
+        // INIT VALIDATE
+        final AwesomeValidation mAwesomeValidation = new AwesomeValidation(BASIC);
+        // AFFECT RULES
+        mAwesomeValidation.addValidation(this, R.id.cr_coef_saisie, Range.closed(0,10), R.string.err_coef);
+        mAwesomeValidation.addValidation(this, R.id.cr_bilan_saisie, RegexTemplate.NOT_EMPTY, R.string.err_bilan);
+        mAwesomeValidation.addValidation(this, R.id.cr_echant_quant_saisie,Range.closed(1,10) , R.string.err_echant_quant);
+
         EditText btn_date_picker=((EditText) findViewById(R.id.cr_date_saisie));
         btn_date_picker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +125,7 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
                 newFragment.show(getSupportFragmentManager(), "datePicker");
             }
         });
+
         // RECUPERATION DE LA LISTE DE MEDICAMENT
         final ArrayList<Medicament> data;
         data = new ArrayList<Medicament>();
@@ -260,56 +280,90 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onClick(View v) {
                 // FORMATAGE DE L'OBJET RAPPORTVISITPOST POUR ENVOIE JSON
-                Spinner spinnerPra = (Spinner) findViewById(R.id.spinner_pra);
-                Praticien pra =(Praticien) spinnerPra.getSelectedItem();
-                TextView ui_cr_bilan_saisie = (TextView) findViewById(R.id.cr_bilan_saisie);
-                TextView ui_cr_date_saisie = (TextView) findViewById(R.id.cr_date_saisie);
-                TextView ui_cr_coef_impact_saisie = (TextView) findViewById(R.id.cr_coef_saisie);
-                Spinner spinnerMotif = (Spinner) findViewById(R.id.spinner_motif);
-                Motif motif =(Motif) spinnerMotif.getSelectedItem();
-                String passEncript=user.hashPassword(user.getSalt(),user.getClearPass());
-                WsseToken token  = new WsseToken(user,passEncript);
-                RetrofitConnect conncecting = new RetrofitConnect(user.getUsername(),token);
-                Retrofit retrofit=conncecting.buildRequest();
-                AdressBookApi service = retrofit.create(AdressBookApi.class);
-                RapportVisitePost rapportVisite = new RapportVisitePost();
-                rapportVisite.setRapEchantillons(rapportEchantsPost);
-                rapportVisite.setRapVisiteur(userId);
-                rapportVisite.setRapMotif(motif.getId());
-                rapportVisite.setRapPraticien(pra.getId());
-                rapportVisite.setRapBilan(ui_cr_bilan_saisie.getText().toString());
-                rapportVisite.setRapCoefImpact(Integer.parseInt(ui_cr_coef_impact_saisie.getText().toString()));
-                rapportVisite.setRapDate(ui_cr_date_saisie.getText().toString());
-                service.saisieCR(rapportVisite).enqueue(new Callback<RapportVisitePost>() {
-                    @Override
-                    public void onResponse(Call<RapportVisitePost> call, Response<RapportVisitePost> response) {
-                        Log.i("RESPONSE CREATE :","OKOK"+response.body()+response.code());
-                        Log.i("RESPONSE CODE :"," CODE ::  "+response.code());
-                        // SI LA RESSOURCE EST CREER : CODE 201  ET RENVOIE PAGE CR
-                        if (response.code()==201){
-                            Toast.makeText(SaisieCRActivity.this,"Compte rendu créer !",Toast.LENGTH_SHORT).show();
-                            Intent intentVisit = new Intent(getApplicationContext(),CrActivity.class);
-                            intentVisit.putExtra("userId",user.getId());
-                            intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
-                            startActivity(intentVisit);
-                        }
-                        else{
-                            // SINON AFFICAGE MSG ERREUR ET LOG CODE
-                            Toast.makeText(SaisieCRActivity.this,"Un probléme est survenur lors de la création...",Toast.LENGTH_SHORT).show();
-                            Log.w("CREATION CR :"," : ECHEC"+response.body()+response.code());
-                        }
-                    }
+                if (mAwesomeValidation.validate()){
+                    Spinner spinnerPra = (Spinner) findViewById(R.id.spinner_pra);
+                    Praticien pra =(Praticien) spinnerPra.getSelectedItem();
+                    TextView ui_cr_bilan_saisie = (TextView) findViewById(R.id.cr_bilan_saisie);
+                    TextView ui_cr_date_saisie = (TextView) findViewById(R.id.cr_date_saisie);
+                    TextView ui_cr_coef_impact_saisie = (TextView) findViewById(R.id.cr_coef_saisie);
+                    Spinner spinnerMotif = (Spinner) findViewById(R.id.spinner_motif);
+                    Motif motif =(Motif) spinnerMotif.getSelectedItem();
+                    String passEncript=user.hashPassword(user.getSalt(),user.getClearPass());
+                    WsseToken token  = new WsseToken(user,passEncript);
+                    RetrofitConnect conncecting = new RetrofitConnect(user.getUsername(),token);
+                    Retrofit retrofit=conncecting.buildRequest();
+                    AdressBookApi service = retrofit.create(AdressBookApi.class);
+                    RapportVisitePost rapportVisite = new RapportVisitePost();
+                    rapportVisite.setRapEchantillons(rapportEchantsPost);
+                    rapportVisite.setRapVisiteur(userId);
+                    rapportVisite.setRapMotif(motif.getId());
+                    rapportVisite.setRapPraticien(pra.getId());
+                    rapportVisite.setRapBilan(ui_cr_bilan_saisie.getText().toString());
+                    rapportVisite.setRapCoefImpact(Integer.parseInt(ui_cr_coef_impact_saisie.getText().toString()));
+                    rapportVisite.setRapDate(ui_cr_date_saisie.getText().toString());
+                    if (templateKey.equals("view")){
+                        service.saisieCR(rapportVisite).enqueue(new Callback<RapportVisitePost>() {
+                            @Override
+                            public void onResponse(Call<RapportVisitePost> call, Response<RapportVisitePost> response) {
+                                Log.i("RESPONSE CREATE :","OKOK"+response.body()+response.code());
+                                Log.i("RESPONSE CODE :"," CODE ::  "+response.code());
+                                // SI LA RESSOURCE EST CREER : CODE 201  ET RENVOIE PAGE CR
+                                if (response.code()==201){
+                                    Toast.makeText(SaisieCRActivity.this,"Compte rendu créer !",Toast.LENGTH_SHORT).show();
+                                    Intent intentVisit = new Intent(getApplicationContext(),CrActivity.class);
+                                    intentVisit.putExtra("userId",user.getId());
+                                    intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                                    startActivity(intentVisit);
+                                }
+                                else{
+                                    // SINON AFFICAGE MSG ERREUR ET LOG CODE
+                                    Toast.makeText(SaisieCRActivity.this,"Un probléme est survenur lors de la création...",Toast.LENGTH_SHORT).show();
+                                    Log.w("CREATION CR :"," : ECHEC"+response.body()+response.code());
+                                }
+                            }
 
-                    @Override
-                    public void onFailure(Call<RapportVisitePost> call, Throwable t) {
-                        Log.e("RESPONSE CREATE :","ERROR"+t);
+                            @Override
+                            public void onFailure(Call<RapportVisitePost> call, Throwable t) {
+                                Log.e("RESPONSE CREATE :","ERROR"+t);
+                            }
+                        });
                     }
-                });
+                    else if (templateKey.equals("edit")){
+                        final int crId = intent.getIntExtra("crId", 0);
+                        rapportVisite.setId(crId);
+                        service.modifCR(rapportVisite).enqueue(new Callback<RapportVisitePost>() {
+                            @Override
+                            public void onResponse(Call<RapportVisitePost> call, Response<RapportVisitePost> response) {
+                                Log.i("RESPONSE MODIF :","OKOK"+response.body()+response.code());
+                                Log.i("RESPONSE CODE :"," CODE ::  "+response.code());
+                                // SI LA RESSOURCE EST CREER : CODE 201  ET RENVOIE PAGE CR
+                                if (response.code()==201){
+                                    Toast.makeText(SaisieCRActivity.this,"Compte rendu créer !",Toast.LENGTH_SHORT).show();
+                                    Intent intentVisit = new Intent(getApplicationContext(),CrActivity.class);
+                                    intentVisit.putExtra("userId",user.getId());
+                                    intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                                    startActivity(intentVisit);
+                                }
+                                else{
+                                    // SINON AFFICAGE MSG ERREUR ET LOG CODE
+                                    Toast.makeText(SaisieCRActivity.this,"Un probléme est survenur lors de la création...",Toast.LENGTH_SHORT).show();
+                                    Log.w("MODIF CR :"," : ECHEC"+response.body()+response.code());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<RapportVisitePost> call, Throwable t) {
+                                Log.e("RESPONSE CREATE :","ERROR"+t);
+                            }
+                        });
+                    }
+                }
+
+
             }
         });
         if(templateKey!=null) {
             if (templateKey.equals("edit")) {
-
                 mProgressDialog = new ProgressDialog(this);
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setMessage("Récupération du compte rendu...");

@@ -31,16 +31,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.7"
                     android:text="@string/Praticien"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <Spinner
                     android:id="@+id/spinner_pra"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp" />
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
 
             </TableRow>
 
@@ -54,7 +55,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.7"
                     android:text="@string/DateRap"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
@@ -65,7 +66,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_weight="1"
-                    android:hint="Choisissez une date" />
+                    android:hint="Choisissez une date"
+                    android:inputType="date" />
 
             </TableRow>
 
@@ -79,16 +81,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.7"
                     android:text="@string/MotifVisite"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <Spinner
                     android:id="@+id/spinner_motif"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp" />
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
 
             </TableRow>
 
@@ -102,7 +105,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.7"
                     android:text="@string/Bilan"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
@@ -125,7 +128,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/cr_echant_saisie_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -154,8 +157,9 @@
                     android:id="@+id/btn_add"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="28dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.3"
                     android:text="@string/ajouter" />
             </TableRow>
 
@@ -181,7 +185,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:text="@string/crCoefLabel"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
@@ -192,7 +196,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="1"
-                    android:hint="Coeficient d'impact" />
+                    android:hint="Coeficient d'impact"
+                    android:inputType="number" />
             </TableRow>
 
             <TableRow
