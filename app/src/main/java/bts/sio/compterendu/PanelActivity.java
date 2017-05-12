@@ -13,7 +13,7 @@ import java.util.Date;
 import bts.sio.compterendu.helper.CRReaderDbHelper;
 import bts.sio.compterendu.model.Account;
 
-public class PanelVisiteurActivity extends AppCompatActivity {
+public class PanelActivity extends AppCompatActivity {
 
     private CRReaderDbHelper mDbHelper;
 
@@ -47,6 +47,16 @@ public class PanelVisiteurActivity extends AppCompatActivity {
                 startActivity(intentVisit);
             }
         });
+        Button bt_ac = (Button) findViewById(R.id.AC);
+        bt_ac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentVisit = new Intent(getApplicationContext(),AcActivity.class);
+                intentVisit.putExtra("userId",user.getId());
+                intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                startActivity(intentVisit);
+            }
+        });
         Button bt_med = (Button) findViewById(R.id.Med);
         bt_med.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +75,24 @@ public class PanelVisiteurActivity extends AppCompatActivity {
                 intentVisit.putExtra("userId",user.getId());
                 intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
                 startActivity(intentVisit);
+            }
+        });
+        Button bt_collab = (Button) findViewById(R.id.Collab);
+        bt_collab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentVisit = new Intent(getApplicationContext(),ConsulterCollabActivity.class);
+                intentVisit.putExtra("userId",user.getId());
+                intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
+                startActivity(intentVisit);
+            }
+        });
+        Button bt_deco = (Button) findViewById(R.id.btn_deco);
+        bt_deco.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLogin=new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intentLogin);
             }
         });
 

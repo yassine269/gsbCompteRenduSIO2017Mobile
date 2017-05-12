@@ -20,7 +20,7 @@ import java.util.List;
 
 import bts.sio.compterendu.helper.CRReaderDbHelper;
 import bts.sio.compterendu.model.Account;
-import bts.sio.compterendu.model.Medicament;
+import bts.sio.compterendu.model.User;
 import bts.sio.compterendu.security.WsseToken;
 import bts.sio.compterendu.util.AdressBookApi;
 import bts.sio.compterendu.util.RetrofitConnect;
@@ -29,10 +29,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ConsulterMedActivity extends AppCompatActivity {
+public class ConsulterCollabActivity extends AppCompatActivity {
 
     private CRReaderDbHelper mDbHelper;
-    private RecyclerView ui_medListRecyclerView;
+    private RecyclerView ui_collabListRecyclerView;
     private Calendar limitConnect;
     private ProgressDialog mProgressDialog;
 
@@ -40,7 +40,7 @@ public class ConsulterMedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_medicament_activity);
+        setContentView(R.layout.content_collaborateur_activity);
         Intent intent = getIntent();
         int userId=intent.getIntExtra("userId",0);
         long timeMillis=intent.getLongExtra("limitConnect",0);
@@ -70,18 +70,18 @@ public class ConsulterMedActivity extends AppCompatActivity {
         // INIT LOADER
         mProgressDialog=new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Chargement des médicaments...");
+        mProgressDialog.setMessage("Chargement des collaborateurs...");
         mProgressDialog.show();
-        ui_medListRecyclerView = (RecyclerView)findViewById(R.id.crList_recycler_view);
-        ui_medListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ui_medListRecyclerView.setAdapter(new MedListAdapter());
+        ui_collabListRecyclerView = (RecyclerView)findViewById(R.id.collabList_recycler_view);
+        ui_collabListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ui_collabListRecyclerView.setAdapter(new CollabListAdapter());
 
     }
 
-    class MedListAdapter extends RecyclerView.Adapter<MedCardHolder> {
-        private List<Medicament> _medList;
+    class CollabListAdapter extends RecyclerView.Adapter<CollabCardHolder> {
+        private List<User> _userList;
 
-        public MedListAdapter(){
+        public CollabListAdapter(){
             //***********PREPARATION HEADER WSSE******************
             final Account user = mDbHelper.getUser(getApplicationContext());
             String passEncript=user.hashPassword(user.getSalt(),user.getClearPass());
@@ -89,19 +89,19 @@ public class ConsulterMedActivity extends AppCompatActivity {
             RetrofitConnect conncecting = new RetrofitConnect(user.getUsername(),token);
             Retrofit retrofit=conncecting.buildRequest();
             AdressBookApi service = retrofit.create(AdressBookApi.class);
-            service.getMedicamentList().enqueue(new Callback<List<Medicament>>() {
+            service.getCollabList().enqueue(new Callback<List<User>>() {
                 @Override
-                public void onResponse(Call<List<Medicament>> call, Response<List<Medicament>> response) {
+                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                     //END LOADER
                     if (mProgressDialog.isShowing())
                         mProgressDialog.dismiss();
                     Log.i("Download ::","OK");
-                    _medList =response.body();
+                    _userList =response.body();
                     notifyDataSetChanged();
                 }
 
                 @Override
-                public void onFailure(Call<List<Medicament>> call, Throwable t) {
+                public void onFailure(Call<List<User>> call, Throwable t) {
                     //END LOADER
                     if (mProgressDialog.isShowing())
                         mProgressDialog.dismiss();
@@ -111,57 +111,58 @@ public class ConsulterMedActivity extends AppCompatActivity {
             });
         }
         @Override
-        public MedCardHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public CollabCardHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Log.i("ON-CREATE-VIEW :","OKOK");
-            View cell = LayoutInflater.from(ConsulterMedActivity.this).inflate(R.layout.medicament_cell,parent,false);
-            MedCardHolder holder = new MedCardHolder(cell);
+            View cell = LayoutInflater.from(ConsulterCollabActivity.this).inflate(R.layout.collaborateur_cell,parent,false);
+            CollabCardHolder holder = new CollabCardHolder(cell);
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(MedCardHolder holder, final int position) {
+        public void onBindViewHolder(CollabCardHolder holder, final int position) {
             final Account user = mDbHelper.getUser(getApplicationContext());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int med_id= _medList.get(position).getId();
-                    Intent intentVisit = new Intent(getApplicationContext(),ConsulterMedOneActivity.class);
+                    int collab_id= _userList.get(position).getId();
+                    Intent intentVisit = new Intent(getApplicationContext(),ConsulterCollabOneActivity.class);
                     intentVisit.putExtra("userId",user.getId());
                     intentVisit.putExtra("userConnect",limitConnect);
-                    intentVisit.putExtra("med_id",med_id);
+                    intentVisit.putExtra("collab_id",collab_id);
                     startActivity(intentVisit);
                 }
             });
             Log.i("ON-BIND-VIEW :","OKOK");
-            holder.layoutForMed(_medList.get(position));
+            holder.layoutForCollab(_userList.get(position));
         }
 
         @Override
         public int getItemCount() {
             int itemCount=0;
-            if (_medList !=null){
-                itemCount= _medList.size();
+            if (_userList !=null){
+                itemCount= _userList.size();
             }
             return itemCount;
         }
     }
-    class MedCardHolder extends RecyclerView.ViewHolder{
-        private final TextView ui_medId;
-        private final TextView ui_medDepotLegal;
-        private final TextView ui_med_NomCom;
-        private final TextView ui_medFamille;
-        public MedCardHolder(View cell) {
+    class CollabCardHolder extends RecyclerView.ViewHolder{
+        private final TextView ui_collabId;
+        private final TextView ui_collabNom;
+        private final TextView ui_collabPrenom;
+        private final TextView ui_collabMatricule;
+
+        public CollabCardHolder(View cell) {
             super(cell);
-            ui_medId =(TextView) cell.findViewById(R.id.med_id);
-            ui_medDepotLegal =(TextView) cell.findViewById(R.id.med_depot_legal);
-            ui_med_NomCom =(TextView) cell.findViewById(R.id.med_famille);
-            ui_medFamille =(TextView) cell.findViewById(R.id.med_nom_commercial);
+            ui_collabId =(TextView) cell.findViewById(R.id.collab_id);
+            ui_collabNom =(TextView) cell.findViewById(R.id.collab_nom);
+            ui_collabPrenom =(TextView) cell.findViewById(R.id.collab_prenom);
+            ui_collabMatricule =(TextView) cell.findViewById(R.id.collab_matricule);
         }
-        public void layoutForMed(Medicament medicament){
-            ui_medId.setText(Integer.toString(medicament.getId()));
-            ui_medDepotLegal.setText(medicament.getMed_depot_legal());
-            ui_medFamille.setText(medicament.getMed_famille().getFam_libelle());
-            ui_med_NomCom.setText(medicament.getMed_nom_commercial());
+        public void layoutForCollab(User user){
+            ui_collabId.setText(Integer.toString(user.getId()));
+            ui_collabNom.setText(user.getUsrNom());
+            ui_collabPrenom.setText(user.getUsrPrenom());
+            ui_collabMatricule.setText(user.getUsrMatricule());
 
         }
     }

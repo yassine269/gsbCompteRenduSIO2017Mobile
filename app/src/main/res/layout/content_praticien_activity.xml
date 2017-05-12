@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:id="@+id/activity_content_rapport"
+    android:id="@+id/activity_content_praticien"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="bts.sio.compterendu.PanelVisiteurActivity">
+    tools:context="bts.sio.compterendu.PanelActivity">
     <TextView
         android:id="@+id/ConsulterPra"
         android:layout_width="wrap_content"

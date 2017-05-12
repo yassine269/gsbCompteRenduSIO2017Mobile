@@ -113,4 +113,23 @@
     <string name="praVille">Ville :</string>
     <string name="praCoefNot">Coeficient de notoriété :</string>
     <string name="praType">Type :</string>
+    <string name="collabMat">Matricule :</string>
+    <string name="collabAdresse">Adresse :</string>
+    <string name="collabCp">Code postal :</string>
+    <string name="collabDateEmbauche">Date d\'embauche :</string>
+    <string name="collabFonction">Fonction :</string>
+    <string name="collabDepartement">Departement :</string>
+    <string name="collabRegion">Région :</string>
+    <string name="collabSecteur">Secteur :</string>
+    <string name="collabSupp">Supérieur :</string>
+    <string name="btn_deco">Déconnexion</string>
+    <string name="acLieu">Lieu :</string>
+    <string name="acTheme">Théme :</string>
+    <string name="acStates">Etat :</string>
+    <string name="acReal">Réalisation :</string>
+    <string name="acPra">Praticien convoqués :</string>
+    <string name="ValidAC">Validation d\'activités</string>
+    <string name="ValidACaction">Validation</string>
+    <string name="err_lieu">Veuillez entrer un lieu</string>
+    <string name="InvalidAC">Refuser</string>
 </resources>

@@ -14,20 +14,20 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/SaisieCR">
+        android:layout_below="@+id/SaisieAC">
 
         <TableLayout
-            android:id="@+id/TableFormCr"
+            android:id="@+id/TableFormAc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TableRow
-                android:id="@+id/row_praticien_cr_saisie"
+                android:id="@+id/row_praticien_ac_saisie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/cr_praticien_label_saisie"
+                    android:id="@+id/ac_praticien_label_saisie"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -43,15 +43,37 @@
                     android:layout_marginTop="28dp"
                     android:layout_weight="1" />
 
+                <Button
+                    android:id="@+id/btn_addPra"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="0.3"
+                    android:text="@string/ajouter" />
+
             </TableRow>
 
+            <LinearLayout
+                android:id="@+id/row_ac_praticien_entry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/list_ac_praticien"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+            </LinearLayout>
+
+
             <TableRow
-                android:id="@+id/row_date_cr_saisie"
+                android:id="@+id/row_date_ac_saisie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/cr_date_label_saisie"
+                    android:id="@+id/ac_date_label_saisie"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -61,7 +83,7 @@
                     android:textStyle="bold|italic" />
 
                 <EditText
-                    android:id="@+id/cr_date_saisie"
+                    android:id="@+id/ac_date_saisie"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -72,85 +94,87 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/row_motif_cr_saisie"
+                android:id="@+id/row_ac_theme_saisie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/cr_motif_label_saisie"
+                    android:id="@+id/ac_theme_label_saisie"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_weight="0.7"
-                    android:text="@string/MotifVisite"
-                    android:textColor="@android:color/darker_gray"
-                    android:textStyle="bold|italic" />
-
-                <Spinner
-                    android:id="@+id/spinner_motif"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
-                    android:layout_weight="1" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/row_bilan_cr_saisie"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/cr_bilan_label_saisie"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
-                    android:layout_weight="0.7"
-                    android:text="@string/Bilan"
+                    android:text="@string/acTheme"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <EditText
-                    android:id="@+id/cr_bilan_saisie"
+                    android:id="@+id/ac_theme_saisie"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="1"
-                    android:hint="Bilan de la visite"
+                    android:hint="Théme de l'activité"
+                    android:inputType="text" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/row_ac_lieu_saisie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ac_lieu_label_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="0.7"
+                    android:text="@string/acLieu"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
+
+                <EditText
+                    android:id="@+id/ac_lieu_saisie"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:hint="Lieu de l'activité"
                     android:inputType="textMultiLine" />
 
             </TableRow>
 
             <TableRow
-                android:id="@+id/row_echant_cr_saisie"
+                android:id="@+id/row_ac_realisation_saisie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/cr_echant_saisie_label"
+                    android:id="@+id/ac_realisation_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="1"
-                    android:text="@string/Echant"
+                    android:text="@string/acReal"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <Spinner
-                    android:id="@+id/spinner_med"
+                    android:id="@+id/spinner_user"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="1" />
 
                 <EditText
-                    android:id="@+id/cr_echant_quant_saisie"
+                    android:id="@+id/ac_realisation_budget_saisie"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="0.5"
-                    android:hint="Quantite"
+                    android:hint="Budget alloué"
                     android:inputType="number" />
 
                 <Button
@@ -164,49 +188,24 @@
             </TableRow>
 
             <LinearLayout
-                android:id="@+id/row_echant_cr_entry"
+                android:id="@+id/row_ac_realisation_entry"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <ListView
-                    android:id="@+id/list_cr_echant"
+                    android:id="@+id/list_ac_realisation"
                     android:layout_width="match_parent"
                     android:layout_height="100dp" />
             </LinearLayout>
 
             <TableRow
-                android:id="@+id/row_coef_cr_saisie"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/cr_coef_saisie_label"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
-                    android:layout_weight="0.5"
-                    android:text="@string/crCoefLabel"
-                    android:textColor="@android:color/darker_gray"
-                    android:textStyle="bold|italic" />
-
-                <EditText
-                    android:id="@+id/cr_coef_saisie"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
-                    android:layout_weight="1"
-                    android:hint="Coeficient d'impact"
-                    android:inputType="number" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/row_btn_cr_saisie"
+                android:id="@+id/row_btn_ac_saisie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/valid_saisie_cr"
+                    android:id="@+id/valid_saisie_ac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Valider" />
@@ -216,12 +215,12 @@
 
 
     <TextView
-        android:id="@+id/SaisieCR"
+        android:id="@+id/SaisieAC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/SaisieCR"
+        android:text="@string/SaisieAC"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"

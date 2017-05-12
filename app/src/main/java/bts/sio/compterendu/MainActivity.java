@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     final String mdp = ((TextView) findViewById(R.id.password_txt)).getText().toString();
                     // récupération du salt et vérification du username
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://10.0.2.2/gsbCompteRendu/web/app_dev.php/api/")
+                            .baseUrl(AdressBookApi.ENDPOINT)
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     AdressBookApi service = retrofit.create(AdressBookApi.class);
@@ -271,24 +271,10 @@ public class MainActivity extends AppCompatActivity {
         calLimitConnect.setTime(limitConnect);
         calLimitConnect.add(Calendar.MINUTE, 5);
         limitConnect = calLimitConnect.getTime();
-        if (user.getFonction().equals("Visiteur")){
-            Intent intentVisit = new Intent(getApplicationContext(),PanelVisiteurActivity.class);
+            Intent intentVisit = new Intent(getApplicationContext(),PanelActivity.class);
             intentVisit.putExtra("userId",user.getId());
             intentVisit.putExtra("userConnect",calLimitConnect.getTimeInMillis());
             startActivity(intentVisit);
-        }
-        if (user.getFonction().equals("Delegue")){
-            Intent intentDeleg = new Intent(getApplicationContext(),PanelDelegueActivity.class);
-            intentDeleg.putExtra("userId",user.getId());
-            intentDeleg.putExtra("userConnect",calLimitConnect.getTimeInMillis());
-            startActivity(intentDeleg);
-        }
-        if (user.getFonction().equals("Responsable")){
-            Intent intentResp = new Intent(getApplicationContext(),PanelResponsableActivity.class);
-            intentResp.putExtra("userId",user.getId());
-            intentResp.putExtra("userConnect",calLimitConnect.getTimeInMillis());
-            startActivity(intentResp);
-        }
     }
     /**
      * Transformation byte[] to Hexadecimal

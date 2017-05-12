@@ -61,25 +61,10 @@ public class ConsulterPraActivity extends AppCompatActivity {
         bt_retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user.getFonction().equals("Visiteur")){
-                    Intent intentVisit = new Intent(getApplicationContext(),PanelVisiteurActivity.class);
-                    intentVisit.putExtra("userId",user.getId());
-                    intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
-                    startActivity(intentVisit);
-                }
-                if (user.getFonction().equals("Delegue")){
-                    Intent intentDeleg = new Intent(getApplicationContext(),PanelDelegueActivity.class);
-                    intentDeleg.putExtra("userId",user.getId());
-                    intentDeleg.putExtra("userConnect",limitConnect.getTimeInMillis());
-                    startActivity(intentDeleg);
-                }
-                if (user.getFonction().equals("Responsable")){
-                    Intent intentResp = new Intent(getApplicationContext(),PanelResponsableActivity.class);
+                    Intent intentResp = new Intent(getApplicationContext(),PanelActivity.class);
                     intentResp.putExtra("userId",user.getId());
                     intentResp.putExtra("userConnect",limitConnect.getTimeInMillis());
                     startActivity(intentResp);
-                }
-
             }
         });
         // INIT LOADER

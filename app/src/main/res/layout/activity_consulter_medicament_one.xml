@@ -9,240 +9,249 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/layout_id_medicament_view"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ConsulterCR"
-        android:layout_centerVertical="false"
-        android:baselineAligned="false"
-        android:foregroundGravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ConsulterMed">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/medicament_id_label_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/Id"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_id_medicament_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ConsulterCR"
+                android:layout_centerVertical="false"
+                android:baselineAligned="false"
+                android:foregroundGravity="center_vertical"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/medicament_id_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/medicament_id_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/Id"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/medicament_id_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
 
-    <LinearLayout
-        android:id="@+id/layout_med_depot_legal_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_id_medicament_view"
-        android:orientation="horizontal">
+            </TableRow>
 
-        <TextView
-            android:id="@+id/med_depot_legal_label_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/DepotLegal"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_med_depot_legal_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_id_medicament_view"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/med_depot_legal_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/med_depot_legal_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/DepotLegal"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/med_depot_legal_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
 
-    <LinearLayout
-        android:id="@+id/layout_med_nom_com_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_med_depot_legal_view"
-        android:orientation="horizontal">
+            </TableRow>
 
-        <TextView
-            android:id="@+id/med_nom_com_label_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/NomCommercial"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_med_nom_com_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_med_depot_legal_view"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/med_nom_com_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/med_nom_com_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/NomCommercial"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/med_nom_com_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
 
-    <LinearLayout
-        android:id="@+id/layout_med_compositions_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_med_nom_com_view"
-        android:orientation="horizontal">
+            </TableRow>
 
-        <TextView
-            android:id="@+id/med_compositions_label_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:text="@string/Compositions"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_med_compositions_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_med_nom_com_view"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/med_compositions_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/med_compositions_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:text="@string/Compositions"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    <LinearLayout
-        android:id="@+id/layout_medicament_effets_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_med_compositions_view"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/med_compositions_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+            </TableRow>
 
-        <TextView
-            android:id="@+id/medicament_effets_label_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:text="@string/Effets"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_medicament_effets_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_med_compositions_view"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/med_effets_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/medicament_effets_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:text="@string/Effets"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    <LinearLayout
-        android:id="@+id/layout_medicament_contrindic_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_medicament_effets_view"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/med_effets_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+            </TableRow>
 
-        <TextView
-            android:id="@+id/medicament_contrindic_label_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/ContreIndic"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_medicament_contrindic_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_medicament_effets_view"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/medicament_contrindic_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/medicament_contrindic_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/ContreIndic"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    <LinearLayout
-        android:id="@+id/layout_prix_echant_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_medicament_contrindic_view"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/medicament_contrindic_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+            </TableRow>
 
-        <TextView
-            android:id="@+id/prix_echant_abel_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/PrixEchant"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_prix_echant_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_medicament_contrindic_view"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/prix_echant_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/prix_echant_abel_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/PrixEchant"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    <LinearLayout
-        android:id="@+id/layout_med_famille_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_prix_echant_view"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/prix_echant_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+            </TableRow>
 
-        <TextView
-            android:id="@+id/med_famille_label_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/medFamille"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_med_famille_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_prix_echant_view"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/med_famille_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/med_famille_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/medFamille"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/med_famille_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
 
-    <LinearLayout
-        android:id="@+id/layout_med_prescrire_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_prix_echant_view"
-        android:orientation="horizontal">
+            </TableRow>
 
-        <TextView
-            android:id="@+id/med_prescrire_label_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1"
-            android:text="@string/medPrescrire"
-            android:textColor="@android:color/darker_gray"
-            android:textStyle="bold|italic" />
+            <TableRow
+                android:id="@+id/layout_med_prescrire_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_prix_echant_view"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/med_prescrire_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/med_prescrire_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/medPrescrire"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/med_prescrire_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
 
+            </TableRow>
 
+        </TableLayout>
+    </ScrollView>
     <TextView
         android:id="@+id/ConsulterCR"
         android:layout_width="wrap_content"

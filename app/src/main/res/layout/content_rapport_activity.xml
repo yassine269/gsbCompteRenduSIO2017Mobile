@@ -5,7 +5,7 @@
     android:id="@+id/activity_content_rapport"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="bts.sio.compterendu.PanelVisiteurActivity">
+    tools:context="bts.sio.compterendu.PanelActivity">
 
     <TextView
         android:id="@+id/ConsultationCR"

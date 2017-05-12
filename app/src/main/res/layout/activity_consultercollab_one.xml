@@ -12,32 +12,33 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ConsulterPra">
+        android:layout_below="@+id/ConsulterCollab">
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TableRow
-                android:id="@+id/layout_id_praticien_view"
+                android:id="@+id/layout_id_collab_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/ConsulterCR"
+                android:layout_below="@+id/ConsulterCollab"
                 android:layout_centerVertical="false"
                 android:baselineAligned="false"
                 android:foregroundGravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/praticien_id_label_view"
+                    android:id="@+id/collab_id_label_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="1"
-                    android:text="@string/Id"
+                    android:text="@string/crIdLabel"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/praticien_id_view"
+                    android:id="@+id/collab_id_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -46,14 +47,40 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/layout_pra_nom_view"
+                android:id="@+id/layout_matricule_collab_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_id_praticien_view"
+                android:layout_below="@+id/layout_id_collab_view"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/pra_nom_label_view"
+                    android:id="@+id/collab_matricule_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/crVisitLabel"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/collab_matricule_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layout_collab_nom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_visit_cr_view"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/collab_nom_label_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -63,7 +90,7 @@
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/pra_nom_view"
+                    android:id="@+id/collab_nom_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -72,50 +99,24 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/layout_pra_prenom_view"
+                android:id="@+id/layout_collab_prenom_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_pra_nom_view"
+                android:layout_below="@+id/layout_collab_nom_view"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/pra_prenom_label_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
-                    android:layout_weight="1"
-                    android:text="@string/praPrenom"
-                    android:textColor="@android:color/darker_gray"
-                    android:textStyle="bold|italic" />
-
-                <TextView
-                    android:id="@+id/pra_prenom_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
-                    android:layout_weight="1" />
-
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/layout_pra_adresse_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_pra_prenom_view"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/pra_adresse_label_view"
+                    android:id="@+id/collab_prenom_label_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_weight="1"
-                    android:text="@string/praAdresse"
+                    android:text="@string/DateRap"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/pra_adresse_view"
+                    android:id="@+id/collab_prenom_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -123,24 +124,24 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/layout_pra_cp_view"
+                android:id="@+id/layout_collab_adresse_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_pra_adresse_view"
+                android:layout_below="@+id/layout_collab_prenom_view"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/pra_cp_label_view"
+                    android:id="@+id/collab_adresse_label_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_weight="1"
-                    android:text="@string/praCp"
+                    android:text="@string/collabAdresse"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/pra_cp_view"
+                    android:id="@+id/collab_adresse_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -148,24 +149,24 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/layout_pra_ville_view"
+                android:id="@+id/layout_collab_cp_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_pra_cp_view"
+                android:layout_below="@+id/layout_collab_adresse_view"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/pra_ville_label_view"
+                    android:id="@+id/collab_cp_label_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="1"
-                    android:text="@string/praVille"
+                    android:text="@string/collabCp"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/pra_ville_view"
+                    android:id="@+id/collab_cp_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -173,24 +174,24 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/layout_pra_coef_not_view"
+                android:id="@+id/layout_collab_ville_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_pra_ville_view"
+                android:layout_below="@+id/layout_collab_cp_view"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/pra_coef_not_label_view"
+                    android:id="@+id/collab_ville_label_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="1"
-                    android:text="@string/praCoefNot"
+                    android:text="@string/Echant"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/pra_coef_view"
+                    android:id="@+id/collab_ville_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -198,24 +199,154 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/layout_pra_type_view"
+                android:id="@+id/layout_collab_date_embauche_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_pra_coef_not_view"
+                android:layout_below="@+id/layout_collab_ville_view"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/pra_type_label_view"
+                    android:id="@+id/collab_date_embauche_label_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_weight="1"
-                    android:text="@string/praType"
+                    android:text="@string/collabDateEmbauche"
                     android:textColor="@android:color/darker_gray"
                     android:textStyle="bold|italic" />
 
                 <TextView
-                    android:id="@+id/pra_type_view"
+                    android:id="@+id/collab_date_embauche_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layout_collab_fonction_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_collab_date_embauche_view"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/collab_fonction_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/collabFonction"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/collab_fonction_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layout_collab_departement_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_collab_fonction_view"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/collab_departement_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/collabDepartement"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/collab_departement_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layout_collab_region_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_collab_departement_view"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/collab_region_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/collabRegion"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/collab_region_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layout_collab_secteur_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_collab_region_view"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/collab_secteur_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/collabSecteur"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/collab_secteur_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layout_collab_supp_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_collab_secteur_view"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/collab_supp_label_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_weight="1"
+                    android:text="@string/collabSupp"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/collab_supp_view"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
@@ -226,13 +357,15 @@
         </TableLayout>
     </ScrollView>
 
+
+
     <TextView
-        android:id="@+id/ConsulterPra"
+        android:id="@+id/ConsulterCollab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/ConsulterPrat"
+        android:text="@string/ConsulterCollab"
         android:textAllCaps="false"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="18sp"
@@ -253,4 +386,3 @@
 
 
 </RelativeLayout>
-

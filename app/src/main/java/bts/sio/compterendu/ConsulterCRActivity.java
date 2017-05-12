@@ -46,6 +46,9 @@ public class ConsulterCRActivity extends AppCompatActivity {
         int userId=intent.getIntExtra("userId",0);
         long timeMillis=intent.getLongExtra("limitConnect",0);
         templateKey = intent.getStringExtra("templateKey");
+        if (templateKey==null){
+            templateKey="view";
+        }
         limitConnect= Calendar.getInstance();
         limitConnect.setTimeInMillis(timeMillis);
 
@@ -121,26 +124,72 @@ public class ConsulterCRActivity extends AppCompatActivity {
             RetrofitConnect conncecting = new RetrofitConnect(user.getUsername(),token);
             Retrofit retrofit=conncecting.buildRequest();
             AdressBookApi service = retrofit.create(AdressBookApi.class);
-            service.getRapportList(user.getId(),templateKey).enqueue(new Callback<List<RapportVisite>>() {
-                @Override
-                public void onResponse(Call<List<RapportVisite>> call, Response<List<RapportVisite>> response) {
-                    //END LOADER
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
-                    Log.i("Download ::","OK");
-                    _crList=response.body();
-                    notifyDataSetChanged();
-                }
+            if (user.getFonction().equals("Visiteur")){
+                service.getRapportList(user.getId(),templateKey).enqueue(new Callback<List<RapportVisite>>() {
+                    @Override
+                    public void onResponse(Call<List<RapportVisite>> call, Response<List<RapportVisite>> response) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","OK");
+                        _crList=response.body();
+                        notifyDataSetChanged();
+                    }
 
-                @Override
-                public void onFailure(Call<List<RapportVisite>> call, Throwable t) {
-                    //END LOADER
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
-                    Log.i("Download ::","ERROR");
-                    Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<List<RapportVisite>> call, Throwable t) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","ERROR");
+                        Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            if (user.getFonction().equals("Delegue")){
+                service.getRapportList(user.getId(),1,0).enqueue(new Callback<List<RapportVisite>>() {
+                    @Override
+                    public void onResponse(Call<List<RapportVisite>> call, Response<List<RapportVisite>> response) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","OK");
+                        _crList=response.body();
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<RapportVisite>> call, Throwable t) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","ERROR");
+                        Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            else if (user.getFonction().equals("Responsable")){
+                service.getRapportList(user.getId(),0,1).enqueue(new Callback<List<RapportVisite>>() {
+                    @Override
+                    public void onResponse(Call<List<RapportVisite>> call, Response<List<RapportVisite>> response) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","OK");
+                        _crList=response.body();
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<RapportVisite>> call, Throwable t) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","ERROR");
+                        Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
         @Override
         public CrCardHolder onCreateViewHolder(ViewGroup parent, int viewType) {

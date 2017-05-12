@@ -56,7 +56,7 @@ public class RetrofitConnect {
                 .create();
         OkHttpClient client=httpClient.build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2/gsbCompteRendu/web/app_dev.php/api/")
+                .baseUrl(AdressBookApi.ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build();

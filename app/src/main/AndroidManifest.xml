@@ -17,17 +17,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PanelVisiteurActivity" />
+        <activity android:name=".PanelActivity" />
         <activity android:name=".ConsulterCRActivity" />
-        <activity android:name=".PanelDelegueActivity" />
-        <activity android:name=".PanelResponsableActivity" />
         <activity android:name=".SaisieCRActivity" />
         <activity android:name=".ConsulterCrOneActivity" />
         <activity android:name=".ConsulterMedOneActivity" />
         <activity android:name=".ConsulterMedActivity" />
         <activity android:name=".ConsulterPraOneActivity" />
         <activity android:name=".ConsulterPraActivity" />
+        <activity android:name=".ConsulterCollabOneActivity" />
+        <activity android:name=".ConsulterCollabActivity" />
         <activity android:name=".CrActivity"/>
+        <activity android:name=".ConsulterAcOneActivity" />
+        <activity android:name=".ConsulterACActivity" />
+        <activity android:name=".SaisieACActivity" />
+        <activity android:name=".AcActivity"/>
     </application>
 
 </manifest>

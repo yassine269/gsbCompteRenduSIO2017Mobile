@@ -2,16 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:id="@+id/activity_content_medicament"
+    android:id="@+id/activity_content_actcompl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="bts.sio.compterendu.PanelActivity">
-
+    <TextView
+        android:id="@+id/ConsulterActCompl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/ConsulterAC"
+        android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="18sp"
+        android:textStyle="normal|bold" />
     <LinearLayout
         android:id="@+id/action_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ConsulterMed"
+        android:layout_below="@+id/ConsulterActCompl"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -24,24 +34,22 @@
             android:backgroundTint="@android:color/holo_blue_light"
             android:layout_marginRight="10dp"
             android:text="@string/retour" />
+
+        <Button
+            android:id="@+id/btn_action"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@android:drawable/toast_frame"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:text="@string/Modif_CR_short" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/ConsulterMed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/ConsulterMed"
-        android:textAllCaps="false"
-        android:textColor="@android:color/holo_blue_light"
-        android:textSize="18sp"
-        android:textStyle="normal|bold" />
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/crList_recycler_view"
+        android:id="@+id/actcomplList_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/action_layout"
         android:layout_marginTop="30dp" />
+
 </RelativeLayout>

@@ -358,8 +358,6 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
                         });
                     }
                 }
-
-
             }
         });
         if(templateKey!=null) {
@@ -402,8 +400,6 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
             }
         }
     }
-
-
 
     // LISTENNER FOR SPINNER'S
     @Override
