@@ -28,13 +28,13 @@ import retrofit2.http.Query;
  */
 
 public interface AdressBookApi {
-    String ENDPOINT="http://10.0.2.2/gsbCompteRendu/web/app_dev.php/api/";
+    String ENDPOINT="http://www.gsb.c7j-studio.com/api/";
     //COMPTE ET LOGIN
     @GET("publics/{user}/users")
     Call<Account>account(@Path("user") String user);
     @GET("login")
     Call<LoginApi>getApiLogin();
-    // PRATICIEN
+    // PRATICIENs
     @GET("praticien")
     Call<List<Praticien>> getPraticienList();
     @GET("onepraticiens/{id}")
@@ -80,6 +80,13 @@ public interface AdressBookApi {
             @Query("template") String templateKey,
             @Query("realisation") int realisation
     );
+    @GET("actcompl")
+    Call<List<ActCompl>> getActComplList(
+            @Query("realisation") int realisation,
+            @Query("region") int region,
+            @Query("secteur") int secteur,
+            @Query("template") String templateKey
+            );
     @GET("oneactcompls/{id}")
     Call<ActCompl> getOneActCompl(@Path("id") int id);
     @POST("actcompls")

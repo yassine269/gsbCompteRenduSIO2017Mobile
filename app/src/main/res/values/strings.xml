@@ -27,7 +27,7 @@
     <string name="login">Login :</string>
     <string name="mdp">Mot de passe :</string>
 
-    <string name="BvnVisiteur">Connecté en tant que Visiteur :</string>
+    <string name="BvnVisiteur">Connecté en tant que </string>
     <string name="BvnDelegue">Connecté en tant que Délégué :</string>
     <string name="BvnResponsable">Connecté en tant que Responsable :</string>
 

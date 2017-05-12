@@ -77,44 +77,68 @@ public class ConsulterACActivity extends AppCompatActivity {
             }
         });
         Button bt_action = (Button) findViewById(R.id.btn_action);
-        if (templateKey.equals("view")){
-            ((TextView) findViewById(R.id.ConsulterActCompl)).setText("Consultation d'activités complémentaire");
-            bt_action.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intentVisit = new Intent(getApplicationContext(),ConsulterACActivity.class);
-                    intentVisit.putExtra("userId",user.getId());
-                    intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
-                    intentVisit.putExtra("templateKey","edit");
-                    startActivity(intentVisit);
+        switch (templateKey) {
+            case "view":
+                ((TextView) findViewById(R.id.ConsulterActCompl)).setText("Consultation d'activités complémentaire");
+                switch (user.getFonction()) {
+                    case "Delegue":
+                        bt_action.setText("Validation");
+                        bt_action.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intentVisit = new Intent(getApplicationContext(), ConsulterACActivity.class);
+                                intentVisit.putExtra("userId", user.getId());
+                                intentVisit.putExtra("userConnect", limitConnect.getTimeInMillis());
+                                intentVisit.putExtra("templateKey", "validate");
+                                startActivity(intentVisit);
+                            }
+                        });
+                        break;
+                    case "Responsable":
+                        bt_action.setVisibility(View.GONE);
+                        break;
+                    default:
+                        bt_action.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intentVisit = new Intent(getApplicationContext(), ConsulterACActivity.class);
+                                intentVisit.putExtra("userId", user.getId());
+                                intentVisit.putExtra("userConnect", limitConnect.getTimeInMillis());
+                                intentVisit.putExtra("templateKey", "edit");
+                                startActivity(intentVisit);
+                            }
+                        });
+                        break;
                 }
-            });
-        }else if (templateKey.equals("edit")) {
-            bt_action.setText("Consultation");
-            ((TextView) findViewById(R.id.ConsulterActCompl)).setText("Modification d'activités complémentaire");
-            bt_action.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intentVisit = new Intent(getApplicationContext(), ConsulterACActivity.class);
-                    intentVisit.putExtra("userId", user.getId());
-                    intentVisit.putExtra("userConnect", limitConnect.getTimeInMillis());
-                    intentVisit.putExtra("templateKey", "view");
-                    startActivity(intentVisit);
-                }
-            });
-        }else if (templateKey.equals("validate")){
+                break;
+            case "edit":
+                bt_action.setText("Consultation");
+                ((TextView) findViewById(R.id.ConsulterActCompl)).setText("Modification d'activités complémentaire");
+                bt_action.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentVisit = new Intent(getApplicationContext(), ConsulterACActivity.class);
+                        intentVisit.putExtra("userId", user.getId());
+                        intentVisit.putExtra("userConnect", limitConnect.getTimeInMillis());
+                        intentVisit.putExtra("templateKey", "view");
+                        startActivity(intentVisit);
+                    }
+                });
+                break;
+            case "validate":
                 bt_action.setText("Consultation");
                 ((TextView) findViewById(R.id.ConsulterActCompl)).setText("Validation d'activités complémentaire");
                 bt_action.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intentVisit = new Intent(getApplicationContext(),ConsulterACActivity.class);
-                        intentVisit.putExtra("userId",user.getId());
-                        intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());
-                        intentVisit.putExtra("templateKey","view");
+                        Intent intentVisit = new Intent(getApplicationContext(), ConsulterACActivity.class);
+                        intentVisit.putExtra("userId", user.getId());
+                        intentVisit.putExtra("userConnect", limitConnect.getTimeInMillis());
+                        intentVisit.putExtra("templateKey", "view");
                         startActivity(intentVisit);
                     }
                 });
+                break;
         }
         // INIT LOADER
         mProgressDialog=new ProgressDialog(this);
@@ -138,26 +162,75 @@ public class ConsulterACActivity extends AppCompatActivity {
             RetrofitConnect conncecting = new RetrofitConnect(user.getUsername(),token);
             Retrofit retrofit=conncecting.buildRequest();
             AdressBookApi service = retrofit.create(AdressBookApi.class);
-            service.getActComplList(templateKey,user.getId()).enqueue(new Callback<List<ActCompl>>() {
-                @Override
-                public void onResponse(Call<List<ActCompl>> call, Response<List<ActCompl>> response) {
-                    //END LOADER
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
-                    Log.i("Download ::","OK");
-                    _acList=response.body();
-                    notifyDataSetChanged();
-                }
+            if (user.getFonction().equals("Visiteur")){
+                service.getActComplList(templateKey,user.getId()).enqueue(new Callback<List<ActCompl>>() {
+                    @Override
+                    public void onResponse(Call<List<ActCompl>> call, Response<List<ActCompl>> response) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","OK");
+                        _acList=response.body();
+                        notifyDataSetChanged();
+                    }
 
-                @Override
-                public void onFailure(Call<List<ActCompl>> call, Throwable t) {
-                    //END LOADER
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
-                    Log.i("Download ::","ERROR");
-                    Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<List<ActCompl>> call, Throwable t) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","ERROR");
+                        Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+            if (user.getFonction().equals("Delegue")){
+                service.getActComplList(user.getId(),1,0,templateKey).enqueue(new Callback<List<ActCompl>>() {
+                    @Override
+                    public void onResponse(Call<List<ActCompl>> call, Response<List<ActCompl>> response) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","OK DELEGUE");
+                        _acList=response.body();
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ActCompl>> call, Throwable t) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","ERROR");
+                        Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+            else if (user.getFonction().equals("Responsable")){
+                service.getActComplList(user.getId(),0,1,templateKey).enqueue(new Callback<List<ActCompl>>() {
+                    @Override
+                    public void onResponse(Call<List<ActCompl>> call, Response<List<ActCompl>> response) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","OK");
+                        _acList=response.body();
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ActCompl>> call, Throwable t) {
+                        //END LOADER
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Log.i("Download ::","ERROR");
+                        Toast.makeText(getApplicationContext(),"Erreur réseaux, veuillez réessayez  "+t,Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
         }
         @Override
         public AcCardHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -179,7 +252,7 @@ public class ConsulterACActivity extends AppCompatActivity {
                         intentVisit.putExtra("userId",user.getId());
                         intentVisit.putExtra("userConnect",limitConnect);
                         intentVisit.putExtra("templateKey",templateKey);
-                        intentVisit.putExtra("ac_id",ac_id);
+                        intentVisit.putExtra("acId",ac_id);
                         startActivity(intentVisit);
                     }
                     else if (templateKey.equals("edit")){

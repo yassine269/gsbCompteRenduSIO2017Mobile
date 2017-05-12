@@ -337,8 +337,8 @@ public class SaisieCRActivity extends AppCompatActivity implements AdapterView.O
                                 Log.i("RESPONSE MODIF :","OKOK"+response.body()+response.code());
                                 Log.i("RESPONSE CODE :"," CODE ::  "+response.code());
                                 // SI LA RESSOURCE EST CREER : CODE 201  ET RENVOIE PAGE CR
-                                if (response.code()==201){
-                                    Toast.makeText(SaisieCRActivity.this,"Compte rendu créer !",Toast.LENGTH_SHORT).show();
+                                if (response.code()==200){
+                                    Toast.makeText(SaisieCRActivity.this,"Compte rendu modifier !",Toast.LENGTH_SHORT).show();
                                     Intent intentVisit = new Intent(getApplicationContext(),CrActivity.class);
                                     intentVisit.putExtra("userId",user.getId());
                                     intentVisit.putExtra("userConnect",limitConnect.getTimeInMillis());

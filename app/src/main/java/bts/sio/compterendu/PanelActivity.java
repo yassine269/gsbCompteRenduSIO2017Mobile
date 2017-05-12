@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -36,6 +37,16 @@ public class PanelActivity extends AppCompatActivity {
             Date limitConnectReplace = new Date(); // Instantiate a Date object
             limitConnect.setTime(limitConnectReplace);
             limitConnect.add(Calendar.MINUTE, 5);
+        }
+        TextView btn_title = (TextView) findViewById(R.id.titlePanel);
+        if (user.getFonction().equals("Visiteur")){
+            btn_title.append(" "+user.getFonction());
+        }
+        if (user.getFonction().equals("Delegue")){
+            btn_title.append(" "+user.getFonction());
+        }
+        if (user.getFonction().equals("Responsable")){
+            btn_title.append(" "+user.getFonction());
         }
         Button bt_cr = (Button) findViewById(R.id.CR);
         bt_cr.setOnClickListener(new View.OnClickListener() {

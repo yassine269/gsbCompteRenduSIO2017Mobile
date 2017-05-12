@@ -200,6 +200,7 @@ public class ConsulterAcOneActivity extends AppCompatActivity {
                 actComplPost.setAcTheme(ac.getAcTheme());
                 actComplPost.setAcDate(ac.getAcDate());
                 actComplPost.setAcStates(ac.getAcStates());
+                actComplPost.setId(ac.getId());
                 serviceB.modifActCompl(actComplPost).enqueue(new Callback<ActComplPost>() {
                     @Override
                     public void onResponse(Call<ActComplPost> call, Response<ActComplPost> response) {
@@ -207,7 +208,7 @@ public class ConsulterAcOneActivity extends AppCompatActivity {
                         Log.i("RESPONSE CODE :", " CODE ::  " + response.code());
                         // SI LA RESSOURCE EST CREER : CODE 201  ET RENVOIE PAGE CR
                         if (response.code() == 200) {
-                            Toast.makeText(ConsulterAcOneActivity.this, "Activité complémentaire refuser !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ConsulterAcOneActivity.this, "Activité complémentaire REFUSER !", Toast.LENGTH_SHORT).show();
                             Intent intentVisit = new Intent(getApplicationContext(), ConsulterACActivity.class);
                             intentVisit.putExtra("userId", user.getId());
                             intentVisit.putExtra("userConnect", limitConnect.getTimeInMillis());

@@ -76,6 +76,9 @@ public class ConsulterCRActivity extends AppCompatActivity {
             }
         });
         Button bt_action = (Button) findViewById(R.id.btn_action);
+        if (user.getFonction().equals("Delegue") || user.getFonction().equals("Responsable")){
+            bt_action.setVisibility(View.GONE);
+        }
         if (templateKey.equals("view")){
             ((TextView) findViewById(R.id.ConsultationCR)).setText("Consultation de compte rendus");
             bt_action.setOnClickListener(new View.OnClickListener() {
